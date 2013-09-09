@@ -1,0 +1,11 @@
+# virtualenv dir
+bin
+include
+lib
+local
+
+# compile files
+*.pyc
+
+# others
+*.db
