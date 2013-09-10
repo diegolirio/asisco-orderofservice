@@ -1,0 +1,8 @@
+django==1.5
+south
+yolk
+freeze
+ipython
+model_mommy
+selenium
+mock
