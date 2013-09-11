@@ -15,6 +15,13 @@ class Pessoa(models.Model):
 class Cliente(Pessoa):
     tipo = models.CharField(max_length=3, choices=PESSOA_TIPO_CHOICES, default='CLI')
 
+class OrdemServicoItem(models.Model):
+    numero = models.CharField(u'Numero de Desenvo/Conjunto/Peça', max_length=100) 
+    denominacao = models.CharField(u'Denominação', max_length=200)
+
+    def __unicode__(self):
+        "%s - %s" % (self.numero, self.denominacao)
+
 class OrdemServico(models.Model):
     numero = models.CharField(u'Ordem de Serviço', max_length=50)
     projetoNome = models.CharField(u'Nome do Projeto', max_length=100)
@@ -33,14 +40,22 @@ class OrdemServico(models.Model):
     entregaPrazo = models.CharField(u'Prazo de Entrega', max_length=50)
     entregaLugar = models.TextField(u'Lugar de Entrega')
     totalConjunto = models.IntegerField(u'Total de Conjuntos')
+    items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
+    equipe = models.ForeignKey('Equipe')
 
-class OrdemServicoItem(models.Model):
-    numero = models.CharField(u'Numero de Desenvo/Conjunto/Peça', max_length=100) 
-    denominacao = models.CharField(u'Denominação', max_length=200)
-    ordemServico = models.ManyToManyField(OrdemServico, through='Os_OsItem')
+class OrdemServico_OrdemServicoItem(models.Model):
+    ordemServico = models.ForeignKey('OrdemServico', related_name='osositem_os')
+    item = models.ForeignKey('OrdemServicoItem', related_name='osositem_item')
+    quantidade = models.IntegerField()
+    acabamento = models.CharField(u'Acabamento/RAL', max_length=100)
+    observacoes = models.TextField(u'Observações')
+    fabricar = models.BooleanField(u'Fabricar ?')
+    fabricarQuantidade = models.IntegerField(u'Quantidade Fabricar')
+    dataRecebimento = models.DateTimeField(u'Data de Recebimento')    
 
     def __unicode__(self):
-        "%s - %s" % (self.numero, self.denominacao)
+        return "%s - %s" % (self.ordemServico.projetoNome, self.item.denominacao)
+
 
 class Equipe(models.Model):
     nome = models.CharField('Nome da Equipe', max_length=100)
@@ -51,21 +66,3 @@ class Equipe(models.Model):
 class Membro(Pessoa):
     tipo = models.CharField(max_length=3, choices=PESSOA_TIPO_CHOICES, default='MEM')
     equipe = models.ForeignKey('Equipe', related_name='membro_equipe')
-
-
-class Os_OsItem(models.Model):
-    ordemServico = models.ForeignKey('OrdemServico', related_name='osositem_os')
-    item = models.ForeignKey('OrdemServicoItem', related_name='osositem_item')
-    quantidade = models.IntegerField()
-    acabamento = models.CharField(u'Acabamento/RAL', max_length=100)
-    observacoes = models.TextField(u'Observações')
-    fabricar = models.BooleanField(u'Fabricar ?')
-    fabricarQuantidade = models.IntegerField(u'Quantidade Fabricar')
-    dataRecebimento = models.DateTimeField(u'Data de Recebimento')
-    equipe = models.ForeignKey('Equipe')
-
-    def __unicode__(self):
-        return "%s - %s" % (self.ordemServico.projetoNome, self.item.denominacao)
-
-
-

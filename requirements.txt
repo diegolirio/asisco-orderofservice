@@ -4,5 +4,5 @@ yolk
 freeze
 ipython
 model_mommy
-selenium
-mock
+BeautifulSoup
+soupselect
