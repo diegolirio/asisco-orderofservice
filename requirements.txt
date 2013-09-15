@@ -6,3 +6,4 @@ ipython
 model_mommy
 BeautifulSoup
 soupselect
+django-suit
