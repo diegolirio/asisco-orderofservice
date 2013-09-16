@@ -4,8 +4,18 @@
 # coding: utf-8
 # Django settings for schedulesys project.
 
-DEBUG = True
+import os
+import dj_database_url
+from unipath import Path
+PROJECT_DIR = Path(__file__).parent
+
+DEBUG = os.environ.get('DEBUG') == 'True'
 TEMPLATE_DEBUG = DEBUG
+
+# Usar o South para preparar o banco nos tests?
+# True: Sim (default)
+# False: Não! Use o Syncdb
+# SOUTH_TESTS_MIGRATE = False
 
 ADMINS = (
     (u'Fabiano Góes', 'fabianogoes@gmail.com'),
@@ -28,7 +38,6 @@ PROJECT_DIR = Path(__file__).parent
 #     }
 # }
 
-import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(
         default='sqlite:///' + PROJECT_DIR.child('database.db'))
@@ -47,7 +56,7 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'pt_BR'
+LANGUAGE_CODE = 'pt-BR'
 
 SITE_ID = 1
 
@@ -185,18 +194,26 @@ LOGGING = {
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': ['mail_admins', 'console'],
             'level': 'ERROR',
             'propagate': True,
         },

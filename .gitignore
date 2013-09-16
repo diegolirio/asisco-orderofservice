@@ -1,13 +1,16 @@
-# virtualenv dir
 bin
+build
 include
 lib
 local
-
-# compile files
-*.pyc
-
-# others
-*.db
-.Python
+man
 share
+Scripts
+.Python
+*.pyc
+*~
+*.db
+.DS_Store
+.idea
+os_project/static
+os_project/core/static
