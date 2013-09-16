@@ -1,11 +1,13 @@
-django-suit
-django==1.5.1
-dj-database-url==0.2.1
+Django==1.5.4
 Unipath==1.0
-gunicorn==0.17.2
-# pra funcionar a instalação do psycopg2, executar
-# sudo apt-get install libpq-dev
-psycopg2
-dj-static
-south==0.7.6
-mock==1.0.1
+argparse==1.2.1
+distribute==0.6.34
+dj-database-url==0.2.2
+dj-static==0.0.5
+django-suit==0.2.4
+freeze==0.2.0
+gunicorn==18.0
+six==1.4.1
+static==0.4
+wsgiref==0.1.2
+yolk==0.4.3
