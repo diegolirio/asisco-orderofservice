@@ -4,5 +4,5 @@ from models import OrdemServico
 
 def home(request):
     #from django.http import HttpResponse
-    context = {'lista': OrdemServico.objects.all(),}
+    context = None #{'lista': OrdemServico.objects.all(),}
     return render(request, 'index.html', context)
