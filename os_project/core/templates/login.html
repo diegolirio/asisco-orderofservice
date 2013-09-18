@@ -34,8 +34,8 @@
             padding-top: 40px; 
           }
           .container {
-            width: 300px;
-          }
+            width: 380px;
+          }          
 
           /* The white background content wrapper */
           .container > .content {
@@ -84,11 +84,11 @@
                         {% csrf_token %}
                         <table>
                             <tr>
-                                <td><strong>{{ form.username.label_tag }}:</strong></td>
+                                <td style="text-align: right;"><strong>{{ form.username.label_tag }}:</strong></td>
                                 <td colspan="2">{{ form.username }}</td>
                             </tr>
                             <tr>
-                                <td><strong>{{ form.password.label_tag }}:</strong></td>
+                                <td style="text-align: right;"><strong>{{ form.password.label_tag }}:</strong></td>
                                 <td colspan="2">{{ form.password }}</td>
                             </tr>
                             <tr>

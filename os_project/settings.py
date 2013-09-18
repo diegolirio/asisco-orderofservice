@@ -85,6 +85,8 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = PROJECT_DIR.child('static')
+print STATIC_ROOT
+
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -155,7 +157,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 
 LOGIN_URL = "/login/"
 LOGOUT_URL = "/logout/"
-LOGIN_REDIRECT_URL = "/" 
+LOGIN_REDIRECT_URL = "/"
 
 # Django Suit configuration example
 SUIT_CONFIG = {
