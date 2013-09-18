@@ -2,8 +2,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import *
-from forms import *
+from models import OrdemServico, Cliente
+from forms import OrdemServicoForm, ClienteForm
 
 @login_required(login_url='/login/')
 def home(request):
