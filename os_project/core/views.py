@@ -2,8 +2,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import OrdemServico, Cliente
-from forms import OrdemServicoForm, ClienteForm
+from models import OrdemServico, Cliente, Equipe
+from forms import OrdemServicoForm, ClienteForm, EquipeForm
 
 @login_required(login_url='/login/')
 def home(request):
@@ -101,3 +101,59 @@ def cliente_delete(request, pk):
 
 #=== Cliente ===================================================================================	
 
+
+#=== Equipe ====================================================================================
+
+def equipes(request):
+	equipes = Equipe.objects.all()
+	context = {'equipes': equipes,}
+	return render(request, 'equipe.html', context)
+
+def equipe(request, pk=0):
+	if request.method == 'POST':
+		return equipe_save(request, pk)
+	else:
+		if int(pk) == 0:
+			return equipe_add(request)
+		else:
+			return equipe_edit(request, pk)
+
+
+def equipe_add(request):
+	form = EquipeForm()
+	context = {'equipes': equipes,
+			   'form': form}
+	return render(request, 'equipe.html', context)
+
+def equipe_edit(request, pk):
+	equipe = get_object_or_404(Equipe, pk=pk)
+	form = EquipeForm(instance=equipe)
+	context = {'form': form,}
+	return render(request, 'equipe.html', context)
+
+def equipe_save(request, pk):
+	form = EquipeForm(request.POST)
+	if not form.is_valid():
+		return render(request, 'equipe.html', {'form': form,}) 	
+
+	if int(pk) > 0:
+		equipe = form.save(commit=False)
+		equipe.id = pk
+
+	form.save()
+	return HttpResponseRedirect(reverse('equipe_list'))
+
+def equipe_delete(request, pk):
+	equipe = get_object_or_404(Equipe, pk=pk)
+	if request.GET.get('confirm') == 'ok':
+		equipe.delete()
+		return HttpResponseRedirect(reverse('equipe_list'))
+	else:
+		context = {'model_name': 'Equipe',
+				   'model': equipe,
+				   'url_confirm': reverse('equipe_delete', args=[equipe.pk]),
+				   'url_cancel': reverse('equipe_list'),
+				   }
+		return render(request, 'base_delete.html', context)
+
+#=== Equipe ====================================================================================
