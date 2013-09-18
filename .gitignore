@@ -12,5 +12,6 @@ Scripts
 *.db
 .DS_Store
 .idea
+*.log
 os_project/static
 os_project/core/static
