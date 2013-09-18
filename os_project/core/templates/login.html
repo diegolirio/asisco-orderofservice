@@ -1,31 +1,106 @@
 {% extends 'base.html' %}
 
+{%  block page_head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="{{STATIC_URL}}ico/favicon.png">
+
+        {% block page_head_title %}
+            <title>Login | Order of Service</title>
+        {% endblock page_head_title %}
+
+        {% block page_head_css %}
+            <!-- Bootstrap core CSS -->
+            <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <link href="navbar-fixed-top.css" rel="stylesheet">
+        {% endblock page_head_css %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="{{STATIC_URL}}js/html5shiv.js"></script>
+          <script src="{{STATIC_URL}}js/respond.min.js"></script>
+        <![endif]-->
+
+        <style type="text/css">
+          /* Override some defaults */
+          html, body {
+            background-color: #eee;
+          }
+          body {
+            padding-top: 40px; 
+          }
+          .container {
+            width: 300px;
+          }
+
+          /* The white background content wrapper */
+          .container > .content {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 -20px; 
+            -webkit-border-radius: 10px 10px 10px 10px;
+               -moz-border-radius: 10px 10px 10px 10px;
+                    border-radius: 10px 10px 10px 10px;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+               -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                    box-shadow: 0 1px 2px rgba(0,0,0,.15);
+          }
+
+          .login-form {
+            margin-left: 65px;
+          }
+        
+          legend {
+            margin-right: -50px;
+            font-weight: bold;
+            color: #4682B4;
+          }
+
+        </style>
+
+    </head>
+{%  endblock page_head %}
+
+
+{% block top_menu %}
+{% endblock top_menu %}
+
 {% block page_context %}
 
     {% if form.erros %}
         {{ form.non_field_erros }}
     {% endif %}
+          
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="login-form">
+                    <legend>Login</legend>
+                    <form action="{% url 'django.contrib.auth.views.login' %}" method="POST" class="form-inline" role="form">
+                        {% csrf_token %}
+                        <table>
+                            <tr>
+                                <td><strong>{{ form.username.label_tag }}:</strong></td>
+                                <td colspan="2">{{ form.username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>{{ form.password.label_tag }}:</strong></td>
+                                <td colspan="2">{{ form.password }}</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td><button type="submit" class="btn btn-primary">Login</button></td>
+                                <td><button type="reset" class="btn">Cancelar</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div> <!-- <div class="login-form"> -->
+            </div> <!-- <div class="row"> -->
+        </div> <!-- <div class="content"> -->
+    </div> <!-- <div class="container"> -->
 
-    <blockquote>
-        <p><h1>Login de usuário</h1></p>
-        <hr>
-    </blockquote>  
-
-    <center>        
-    <form action="{% url 'django.contrib.auth.views.login' %}" method="POST" class="well">
-        {% csrf_token %}
-        <table>
-            <tr><td><strong>{{ form.username.label_tag }}</strong></td></tr>
-            <tr><td>{{ form.username }}</td></tr>
-            <tr><td><strong>{{ form.password.label_tag }}</strong></td></tr>
-            <tr><td>{{ form.password }}</td></tr>
-            <tr>
-                <td>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="reset" class="btn">Cancelar</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-    </center>
 {% endblock page_context %}

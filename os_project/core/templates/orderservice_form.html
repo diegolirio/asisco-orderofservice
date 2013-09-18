@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+		<legend>Cadastro de Ordem de Serviço</legend>
+		<form method="post" action="">
+		{% if form %}
+			{% csrf_token %}
+			{{form.as_p}}
+			<button type="submit" class="btn btn-primary">Salvar</button>
+			<a href="" class="btn btn-default">Cancelar</a>
+		{% endif %}
+		</form>
+
+    </div>
+    <!-- page_context ================================================================================== -->    
+{% endblock page_context %}

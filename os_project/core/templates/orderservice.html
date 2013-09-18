@@ -4,6 +4,21 @@
     <!-- page_context ================================================================================== -->    
     <div class="container">
 
+		<legend>Cadastro de Ordem de Serviço</legend>
+
+		<a href="#" class="btn btn-primary" ><span class="glyphicon glyphicon-plus">
+			</span>&nbsp;Adicionar nova Ordem de Serviço...
+		</a>
+		<hr>
+
+        {% if lista %}
+            {% include 'orderservice_grid.html' %}
+        {% else %}
+            <p>
+            	<span class="label label-danger">Nenhuma Ordem de Serviço cadastrada até o momento!</span>
+            </p>
+        {% endif %}
+
     </div>
     <!-- page_context ================================================================================== -->    
 {% endblock page_context %}

@@ -153,6 +153,10 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
 
+LOGIN_URL = "/login/"
+LOGOUT_URL = "/logout/"
+LOGIN_REDIRECT_URL = "/" 
+
 # Django Suit configuration example
 SUIT_CONFIG = {
     # header

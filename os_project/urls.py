@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     url(r'^orderservice/(?P<pk>\d+)/$', 'os_project.core.views.orderservice', name='orderservice'),
+    url(r'^cliente/(?P<pk>\d+)/$', 'os_project.core.views.cliente', name='cliente'),
 )
