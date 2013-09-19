@@ -6,6 +6,7 @@ PESSOA_TIPO_CHOICES = (
         ('MEM', u'Membro de Equipe'),
     )
 
+
 class Pessoa(models.Model):
     nome = models.CharField(max_length=100)    
 
