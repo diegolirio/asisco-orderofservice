@@ -22,5 +22,12 @@ urlpatterns = patterns('',
     url(r'^equipe/edit/(?P<pk>\d+)/$', 'os_project.core.views.equipe', name='equipe_edit'),
     url(r'^equipe/delete/conf/(?P<pk>\d+)/$', 'os_project.core.views.equipe_delete', name='equipe_delconf'),
     url(r'^equipe/delete/(?P<pk>\d+)/$', 'os_project.core.views.equipe_delete', name='equipe_delete'),
+
+    url(r'^membro/list/$', 'os_project.core.views.membros', name='membro_list'),
+    url(r'^membro/add/$', 'os_project.core.views.membro', name='membro_add'),
+    url(r'^membro/edit/(?P<pk>\d+)/$', 'os_project.core.views.membro', name='membro_edit'),
+    url(r'^membro/delete/conf/(?P<pk>\d+)/$', 'os_project.core.views.membro_delete', name='membro_delconf'),
+    url(r'^membro/delete/(?P<pk>\d+)/$', 'os_project.core.views.membro_delete', name='membro_delete'),
+    
 )
 

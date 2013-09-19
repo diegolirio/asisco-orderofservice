@@ -4,8 +4,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.db.models.query import QuerySet
 
-from os_project.core.models import OrdemServico, Equipe
-from os_project.core.forms import EquipeForm
+from os_project.core.models import OrdemServico, Equipe, Membro
+from os_project.core.forms import EquipeForm, MembroForm
 
 class HomeTest(TestCase):
     def setUp(self):
@@ -32,6 +32,7 @@ class HomeTest(TestCase):
 
         self.assertContains(self.resp, u'<a href="/cliente/list/')
         self.assertContains(self.resp, u'<a href="/equipe/list/')
+        self.assertContains(self.resp, u'<a href="/membro/list/')
         pass
 
     def test_context(self):
@@ -118,3 +119,66 @@ class EquipeEditTest(TestCase):
     def test_html(self):
         'Html must contain controls...'
         self.assertContains(self.resp, u'<a href="/equipe/list/"')        
+
+
+class MembroEquipeListTest(TestCase):
+    def setUp(self):
+        self.resp = self.client.get(reverse('membro_list'))
+
+    def test_get(self):
+        'Get / must return status code 200'
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_template(self):
+        'Reponse should be a rendered template membro.html'
+        self.assertTemplateUsed(self.resp, 'membro.html')
+
+    def test_context(self):
+        'Context must contain data...'
+        self.assertIn('membros', self.resp.context)
+
+        membros = self.resp.context['membros']
+        self.assertIsInstance(membros, QuerySet)
+
+    def test_html(self):
+        'Html must contain controls...'
+        self.assertContains(self.resp, u'<legend>Cadastro de Membros')
+        self.assertContains(self.resp, u'<a href="/membro/add/"')
+        self.assertContains(self.resp, u'Adicionar novo Membro')
+
+
+class MembroAddTest(TestCase):
+    def setUp(self):
+        self.resp = self.client.get(reverse('membro_add'))
+
+    def test_get(self):
+        'Get / must return status code 200'
+        self.assertEqual(200, self.resp.status_code)        
+
+    def test_template(self):
+        'Reponse should be a rendered template equipe.html'
+        self.assertTemplateUsed(self.resp, 'membro.html')
+
+    def test_context(self):
+        'Context must contain data...'
+        self.assertIn('form', self.resp.context)   
+        
+        form = self.resp.context['form']
+        self.assertIsInstance(form, MembroForm)             
+
+    def test_html(self):
+        'Html must contain controls...'
+        self.assertContains(self.resp, u'<a href="/membro/list/"')
+
+    def test_save(self):
+        'Get / must return status code 200'
+        context = {'nome': 'teste add',
+                   'tipo': 'MEM'}
+        self.resp = self.client.post(reverse('membro_add'), context)   
+        self.assertEqual(200, self.resp.status_code) 
+
+        m = Membro.objects.get(nome='teste add')
+        self.assertIsInstance(m, Membro)             
+
+
+

@@ -2,8 +2,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import OrdemServico, Cliente, Equipe
-from forms import OrdemServicoForm, ClienteForm, EquipeForm
+from models import OrdemServico, Cliente, Equipe, Membro
+from forms import OrdemServicoForm, ClienteForm, EquipeForm, MembroForm
 
 @login_required(login_url='/login/')
 def home(request):
@@ -157,3 +157,59 @@ def equipe_delete(request, pk):
 		return render(request, 'base_delete.html', context)
 
 #=== Equipe ====================================================================================
+
+#=== Membro ====================================================================================
+def membros(request):
+	membros = Membro.objects.all()
+	context = {'membros': membros,}
+	return render(request, 'membro.html', context)
+
+def membro(request, pk=0):
+	if request.method == 'POST':
+		return membro_save(request, pk)
+	else:
+		if int(pk) == 0:
+			return membro_add(request)
+		else:
+			return membro_edit(request, pk)
+
+def membro_save(request, pk):
+	form = MembroForm(request.POST)
+	if not form.is_valid():
+		return render(request, 'membro.html', {'form': form})
+
+	if int(pk) > 0:
+		membro = form.save(commit=False)
+		membro.id = pk
+
+	form.save()
+	return HttpResponseRedirect(reverse('membro_list'))
+
+def membro_edit(request, pk):
+	membro = get_object_or_404(Membro, pk=pk)
+	form = MembroForm(instance=membro)
+	context = {'form': form,}
+	return render(request, 'membro.html', context)
+
+
+def membro_add(request):
+	form = MembroForm()
+	membros = Membro.objects.all()
+	context = {'membros': membros,
+			   'form': form}
+	return render(request, 'membro.html', context)
+
+def membro_delete(request, pk):
+	membro = get_object_or_404(Membro, pk=pk)
+	if request.GET.get('confirm') == 'ok':
+		membro.delete()
+		return HttpResponseRedirect(reverse('membro_list'))
+	else:
+		context = {'model_name': 'Membro',
+				   'model': membro,
+				   'url_confirm': reverse('membro_delete', args=[membro.pk]),
+				   'url_cancel': reverse('membro_list'),
+				   }
+		return render(request, 'base_delete.html', context)
+
+#=== Membro ====================================================================================

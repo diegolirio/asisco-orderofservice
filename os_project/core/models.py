@@ -63,6 +63,7 @@ class Equipe(models.Model):
     def __unicode__(self):
         return self.nome
 
+
 class Membro(Pessoa):
     tipo = models.CharField(max_length=3, choices=PESSOA_TIPO_CHOICES, default='MEM')
     equipe = models.ForeignKey('Equipe', related_name='membro_equipe')
