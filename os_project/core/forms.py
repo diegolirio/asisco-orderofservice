@@ -11,3 +11,12 @@ class ClienteForm(ModelForm):
 	class Meta:
 		model = Cliente
 		exclude = ('tipo',)
+
+class EquipeForm(ModelForm):
+    class Meta:
+        model = Equipe
+
+class MembroForm(ModelForm):
+    class Meta:
+        model = Membro    
+        exclude = ('tipo',)

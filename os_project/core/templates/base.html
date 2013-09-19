@@ -69,17 +69,23 @@
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="#">
+                        <a href="{% url 'cliente_list' %}">
                             <span class="glyphicon glyphicon-user"></span>&nbsp;
-                            Cadastro de Clientes
+                            Cadastro de Cliente
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{% url 'equipe_list' %}">
                             <span class="glyphicon glyphicon-cog"></span>&nbsp;
-                            Cadastro de Equipes
+                            Cadastro de Equipe
                         </a>
                     </li>
+                    <li>
+                        <a href="{% url 'membro_list' %}">
+                            <span class="glyphicon glyphicon-cog"></span>&nbsp;
+                            Cadastro de Membro
+                        </a>
+                    </li>                    
                   </ul>
                 </li>
             {% endif %}
@@ -137,13 +143,11 @@
     <!-- page_footer ============================================================================ -->        
     {% block page_footer %}
         <hr>
-        <center>
-            <p>
-                <a href="http://www.asisco.com.br" target="_blank">
-                    <span class="label label-primary">&copy; Asisco 2013</span>
-                </a>
-            </p>        
-        </center>
+        <p style="text-align: center;">
+            <a href="http://www.asisco.com.br" target="_blank">
+                <span class="label label-primary">&copy; Asisco 2013</span>
+            </a>
+        </p>        
     {% endblock page_footer %}
     <!-- page_footer ============================================================================ -->        
 

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+   
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+        <legend>Cadastro de Equipes</legend>
+
+        {% if form %}
+            {% include 'equipe_form.html' %}
+        {% else %}
+
+            <a href="{% url 'equipe_add' %}" class="btn btn-primary" >
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                Adicionar nova Equipe</a>
+            <hr>
+
+            {% if equipes %}
+                {% include 'equipe_grid.html' %}
+            {% else %}
+                <p>
+                    <span class="label label-danger">Nenhum Cliente cadastrado até o momento!</span>
+                </p>            
+            {% endif %} <!-- if clientes -->
+
+        {% endif %} <!-- if form -->
+
+    </div>
+    <!-- page_context ================================================================================== -->   
+
+{% endblock page_context %}

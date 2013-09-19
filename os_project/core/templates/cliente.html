@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+   
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+        <legend>Cadastro de Clientes</legend>
+
+        {% if form %}
+            {% include 'cliente_form.html' %}
+        {% else %}
+
+            <a href="{% url 'cliente_add' %}" class="btn btn-primary" >
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                Adicionar novo Cliente
+            </a>
+            <hr>
+
+            {% if clientes %}
+                {% include 'cliente_grid.html' %}
+            {% else %}
+                <p>
+                    <span class="label label-danger">Nenhum Cliente cadastrado até o momento!</span>
+                </p>            
+            {% endif %} <!-- if clientes -->
+
+        {% endif %} <!-- if form -->
+
+    </div>
+    <!-- page_context ================================================================================== -->   
+
+{% endblock page_context %}
