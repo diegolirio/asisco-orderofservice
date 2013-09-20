@@ -138,10 +138,11 @@ def equipe_add(request):
 def equipe_edit(request, pk):
     equipe = get_object_or_404(Equipe, pk=pk)
     form = EquipeForm(instance=equipe)
-    membros = Membro.objects.filter(equipe=equipe)
+    membros = form.instance.membro_equipe.all()
     context = {'form': form,
                'membros': membros,
-               'equipe_pk': pk,}
+               'equipe_pk': pk,
+               'equipe': equipe,}
     return render(request, 'equipe.html', context)
 
 
@@ -150,12 +151,12 @@ def equipe_save(request, pk):
     if not form.is_valid():
         return render(request, 'equipe.html', {'form': form, })
 
-	if int(pk) > 0:
+    if int(pk) > 0:
 		equipe = form.save(commit=False)
 		equipe.id = pk
 
-	form.save()
-	return HttpResponseRedirect(reverse('equipe_list'))
+    form.save()
+    return HttpResponseRedirect(reverse('equipe_list'))
 
 def equipe_delete(request, pk):
 	equipe = get_object_or_404(Equipe, pk=pk)
@@ -219,12 +220,16 @@ def membro_add_equipe(request):
     return render(request, 'membro_form_popup.html', context)
 
 def membro_save_equipe(request):
-	form = MembroForm(request.POST)
-	if not form.is_valid():
-		return render(request, 'membro_form_popup.html', {'form': form})
+    form = MembroForm(request.POST)
+    if not form.is_valid():
+        return render(request, 'membro_form_popup.html', {'form': form})
 
-	form.save()
-	return equipe_edit(request, form.instance.equipe.pk)
+    form.save()
+    context = {'membros': membros,
+               'form': form,
+               'status_transaction': 'S',
+               'message': 'Membro de equipe salvo com sucesso!',}
+    return render(request, 'membro_form_popup.html', context)
 
 def membro_delete(request, pk):
 	membro = get_object_or_404(Membro, pk=pk)

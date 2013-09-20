@@ -19,13 +19,23 @@
 
         <br>
         <button type="submit" class="btn btn-primary" >Salvar</button>
-        <a href="{% url 'membro_list' %}" class="btn btn-default" onclick="close_popup()">Cancelar</a>
+        <a href="{% url 'membro_list' %}" class="btn btn-default" onclick="close_popup(N)">Cancelar</a>
     </form>
 </div>
 
-<script type="text/javascript">
-    function close_popup() {
-        window.opener.location.reload();
+<script type="text/javascript">    
+    {% if status_transaction == 'S' %}        
+        close_popup('S');
+    {% endif %}
+
+    {% if status_transaction == 'E' %}        
+        alert('{{message}}');
+    {% endif %}          
+
+    function close_popup(status_transaction) {
+        if (status_transaction == 'S') {
+            window.opener.location.reload();
+        }
         window.close();
     }
 </script>

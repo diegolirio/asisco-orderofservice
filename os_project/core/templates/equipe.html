@@ -9,13 +9,12 @@
 
         {% if form %}
             {% include 'equipe_form.html' %}
+            <hr>
+            <span class="glyphicon glyphicon-plus"></span>
+            <a href="{% url 'membro_add_equipe' %}?equipe={{ equipe_pk }}"
+               onclick="show_popup_membro(this.href); return false;">Adicionar novo membro</a>
 
             {% if membros %}
-                <hr>
-                <h5>Membros da Equipe</h5>
-                <a href="{% url 'membro_add_equipe' %}?equipe={{ equipe_pk }}"
-                   class="btn btn-primary"
-                   onclick="show_popup_membro(this.href); return false;">Adicionar novo membro</a>
                 <br><br>
                 {% include 'membro_grid.html' %}
             {% endif  %}
