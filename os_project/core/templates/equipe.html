@@ -9,6 +9,17 @@
 
         {% if form %}
             {% include 'equipe_form.html' %}
+
+            {% if membros %}
+                <hr>
+                <h5>Membros da Equipe</h5>
+                <a href="{% url 'membro_add_equipe' %}?equipe={{ equipe_pk }}"
+                   class="btn btn-primary"
+                   onclick="show_popup_membro(this.href); return false;">Adicionar novo membro</a>
+                <br><br>
+                {% include 'membro_grid.html' %}
+            {% endif  %}
+
         {% else %}
 
             <a href="{% url 'equipe_add' %}" class="btn btn-primary" >
@@ -28,5 +39,14 @@
 
     </div>
     <!-- page_context ================================================================================== -->   
+
+<script type="text/javascript">
+    function show_popup_membro(url) {
+        w = window.open(
+            url,
+            '',
+            'height=360, width=400, top=50, left=250, scrollbars=no, resizable=no');
+    }
+</script>
 
 {% endblock page_context %}

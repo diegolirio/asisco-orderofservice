@@ -25,6 +25,9 @@ urlpatterns = patterns('',
 
     url(r'^membro/list/$', 'os_project.core.views.membros', name='membro_list'),
     url(r'^membro/add/$', 'os_project.core.views.membro', name='membro_add'),
+    url(r'^membro/add_equipe/$', 'os_project.core.views.membro_add_equipe', name='membro_add_equipe'),
+    url(r'^membro/save_equipe/$', 'os_project.core.views.membro_save_equipe', name='membro_save_equipe'),
+
     url(r'^membro/edit/(?P<pk>\d+)/$', 'os_project.core.views.membro', name='membro_edit'),
     url(r'^membro/delete/conf/(?P<pk>\d+)/$', 'os_project.core.views.membro_delete', name='membro_delconf'),
     url(r'^membro/delete/(?P<pk>\d+)/$', 'os_project.core.views.membro_delete', name='membro_delete'),

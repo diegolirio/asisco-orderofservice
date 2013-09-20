@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+<div class="container">
+
+    <legend>Cadastro de Membro em Equipe</legend>
+
+    <form method="post" action="{% url 'membro_save_equipe' %}">
+        {% csrf_token %}
+        <p>
+            {{ form.nome.errors }}
+            {{ form.nome.label }}: {{ form.nome }}
+        </p>
+        <p>
+            {{ form.equipe.errors }}
+            <input type="hidden" name="equipe" value="{{ form.instance.equipe.id }}">
+            {{ form.equipe.label }}: <strong>{{ form.instance.equipe.nome }}</strong>
+        </p>
+
+        <br>
+        <button type="submit" class="btn btn-primary" >Salvar</button>
+        <a href="{% url 'membro_list' %}" class="btn btn-default" onclick="close_popup()">Cancelar</a>
+    </form>
+</div>
+
+<script type="text/javascript">
+    function close_popup() {
+        window.opener.location.reload();
+        window.close();
+    }
+</script>
+
+{% endblock page_context %}

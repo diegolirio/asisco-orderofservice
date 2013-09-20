@@ -170,15 +170,5 @@ class MembroAddTest(TestCase):
         'Html must contain controls...'
         self.assertContains(self.resp, u'<a href="/membro/list/"')
 
-    def test_save(self):
-        'Get / must return status code 200'
-        context = {'nome': 'teste add',
-                   'tipo': 'MEM'}
-        self.resp = self.client.post(reverse('membro_add'), context)   
-        self.assertEqual(200, self.resp.status_code) 
-
-        m = Membro.objects.get(nome='teste add')
-        self.assertIsInstance(m, Membro)             
-
 
 
