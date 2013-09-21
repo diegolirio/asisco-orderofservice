@@ -76,13 +76,13 @@
                     </li>
                     <li>
                         <a href="{% url 'equipe_list' %}">
-                            <span class="glyphicon glyphicon-cog"></span>&nbsp;
+                            <span class="glyphicon glyphicon-th"></span>&nbsp;
                             Cadastro de Equipe
                         </a>
                     </li>
                     <li>
                         <a href="{% url 'membro_list' %}">
-                            <span class="glyphicon glyphicon-cog"></span>&nbsp;
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;
                             Cadastro de Membro
                         </a>
                     </li>                    
@@ -141,38 +141,12 @@
 
 
     <!-- page_footer ============================================================================ -->        
-    {% block page_footer %}
-        <hr>
-        <p style="text-align: center;">
-            <a href="http://www.asisco.com.br" target="_blank">
-                <span class="label label-primary">&copy; Asisco 2013</span>
-            </a>
-        </p>        
-    {% endblock page_footer %}
+    {% include 'base_footer.html' %}
     <!-- page_footer ============================================================================ -->        
 
-    {% block modal_sobre %}
     <!-- Modal =================================================================================== -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" 
-        aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">OrderOfService</h4>
-        </div>
-        <div class="modal-body">
-            <h1>OrderOfService</h1>
-            <p>Controle de Ordem de Serviços.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    {% include 'base_modal_sobre.html' %}
     <!-- Modal =================================================================================== -->
-    {% endblock modal_sobre %}
 
     {% block page_body_js %}
         <!-- Bootstrap core JavaScript ================================================== -->

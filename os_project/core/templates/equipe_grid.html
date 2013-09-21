@@ -8,8 +8,16 @@
         
         {% for equipe in equipes %}
         <tr>
-            <td>{{equipe.id}}</td>
-            <td>{{equipe.nome}}</td>
+            <td>
+                <a href="{% url 'equipe_edit' equipe.pk %}">
+                    {{equipe.id}}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'equipe_edit' equipe.pk %}">
+                    {{equipe.nome}}
+                </a>
+            </td>
             <td style="text-align: center">
                 <div class="btn-group">
                   <a class="btn dropdown-toggle btn-small btn-default" data-toggle="dropdown" href="#">

@@ -8,8 +8,16 @@
         
         {% for cliente in clientes %}
         <tr>
-            <td>{{cliente.id}}</td>
-            <td>{{cliente.nome}}</td>
+            <td>
+                <a href="{% url 'cliente_edit' cliente.pk %}">
+                    {{cliente.id}}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'cliente_edit' cliente.pk %}">
+                    {{cliente.nome}}
+                </a>
+            </td>
             <td style="text-align: center">
                 <div class="btn-group">
                   <a class="btn dropdown-toggle btn-small btn-default" data-toggle="dropdown" href="#">
