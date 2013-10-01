@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     url(r'^logout/', "django.contrib.auth.views.logout_then_login", {'login_url': '/login/'}, name='logout'),
 
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^orderservice/list/$', 'os_project.core.views.orderservices', name='orderservice_list'),
     url(r'^orderservice/(?P<pk>\d+)/$', 'os_project.core.views.orderservice', name='orderservice'),
     
     url(r'^cliente/list/$', 'os_project.core.views.clientes', name='cliente_list'),

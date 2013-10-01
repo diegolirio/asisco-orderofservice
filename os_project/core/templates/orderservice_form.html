@@ -8,15 +8,110 @@
 		<form method="post" action="">
 		{% if form %}
 			{% csrf_token %}
-			{{form.as_p}}
-			<button type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-floppy-disk"></span>
-                Salvar
-            </button>
-			<a href="" class="btn btn-default">
-                <span class="glyphicon glyphicon-remove"></span>
-                Cancelar
-            </a>
+            {{ form.non_field_errors }}
+            <table>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numero">{{ form.numero.label }}:</label>
+                    </td>
+                    <td>{{ form.numero }}{{ form.numero.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_projetoNome">{{ form.projetoNome.label }}:</label>
+                    </td>
+                    <td>{{ form.projetoNome }}{{ form.projetoNome.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_cliente">{{ form.cliente.label }}:</label>
+                    </td>
+                    <td>{{ form.cliente }}{{ form.cliente.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numeroOP">{{ form.numeroOP.label }}:</label>
+                    </td>
+                    <td>{{ form.numeroOP }}{{ form.numeroOP.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_equipamento">{{ form.equipamento.label }}:</label>
+                    </td>
+                    <td>{{ form.equipamento }}{{ form.equipamento.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_referencia">{{ form.referencia.label }}:</label>
+                    </td>
+                    <td>{{ form.referencia }}{{ form.referencia.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoPor">{{ form.realizadoPor.label }}:</label>
+                    </td>
+                    <td>{{ form.realizadoPor }}{{ form.realizadoPor.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoData">{{ form.realizadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.realizadoData }}{{ form.realizadoData.errors }}</td>
+                    <td  style="text-align: right;">
+                        <label for="id_verificadoPor">{{ form.verificadoPor.label }}:</label>
+                    </td>
+                    <td>{{ form.verificadoPor }}{{ form.verificadoPor.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_verificadoData">{{ form.verificadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.verificadoData }}{{ form.verificadoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_responsavel">{{ form.responsavel.label }}:</label>
+                    </td>
+                    <td>{{ form.responsavel }}{{ form.responsavel.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_revisao">{{ form.revisao.label }}:</label>
+                    </td>
+                    <td>{{ form.revisao }}{{ form.revisao.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_revisaoData">{{ form.revisaoData.label }}:</label>
+                    </td>
+                    <td>{{ form.revisaoData }}{{ form.revisaoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_revisadoPor">{{ form.revisadoPor.label }}:</label>
+                    </td>
+                    <td>{{ form.revisadoPor }}{{ form.revisadoPor.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_totalConjunto">{{ form.totalConjunto.label }}:</label>
+                    </td>
+                    <td>{{ form.totalConjunto }}{{ form.totalConjunto.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_equipe">{{ form.equipe.label }}:</label>
+                    </td>
+                    <td>{{ form.equipe }}{{ form.equipe.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_entregaPrazo">{{ form.entregaPrazo.label }}:</label>
+                    </td>
+                    <td>{{ form.entregaPrazo }}{{ form.entregaPrazo.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_entregaLugar">{{ form.entregaLugar.label }}:</label><br>
+                    </td>
+                    <td colspan="5">
+                        <textarea cols="130" id="id_entregaLugar" name="entregaLugar" rows="3"></textarea>
+                        {{ form.entregaLugar.errors }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: right;">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Salvar
+                        </button>
+                        <a href="" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            Cancelar
+                        </a>
+                    </td>
+               </tr>
+            </table>
 		{% endif %}
 		</form>
 

@@ -22,8 +22,9 @@ def orderservice(request, pk=None):
             return orderservice_edit(request, pk)
 
 
-def orderservice_list(request):
-    context = {}
+def orderservices(request):
+    orderservices = OrdemServico.objects.all()
+    context = {'orderservices': orderservices}
     return render(request, 'orderservices.html', context)
 
 
@@ -43,6 +44,13 @@ def orderservice_save(request, pk):
     form = OrdemServicoForm(request.POST)
     if not form.is_valid():
         return render(request, 'orderservice_form.html', {'form': form, })
+
+    if int(pk) > 0:
+        os = form.save(commit=False)
+        os.id = pk
+
+    form.save()
+    return HttpResponseRedirect(reverse('orderservice_list'))
 
 
 def orderservice_delete(request, pk):
