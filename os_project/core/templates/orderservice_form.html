@@ -95,7 +95,8 @@
                         <label for="id_entregaLugar">{{ form.entregaLugar.label }}:</label><br>
                     </td>
                     <td colspan="5">
-                        <textarea cols="130" id="id_entregaLugar" name="entregaLugar" rows="3"></textarea>
+{#                        <textarea cols="130" id="id_entregaLugar" name="entregaLugar" rows="3"></textarea>#}
+                        {{ form.entregaLugar }}
                         {{ form.entregaLugar.errors }}
                     </td>
                 </tr>
@@ -105,7 +106,7 @@
                             <span class="glyphicon glyphicon-floppy-disk"></span>
                             Salvar
                         </button>
-                        <a href="" class="btn btn-default">
+                        <a href="{% url 'orderservice_list'  %}" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove"></span>
                             Cancelar
                         </a>

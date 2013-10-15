@@ -13,9 +13,12 @@ def home(request):
 
 #=== Ordem de Servicos =========================================================================
 def orderservice(request, pk=None):
+    print "orderservice..."
     if request.method == 'POST':
+        print "request.method == 'POST'"
         return orderservice_save(request, pk)
     else:
+        print "request.method == 'GET'"
         if int(pk) == 0:
             return orderservice_add(request)
         else:
@@ -23,8 +26,7 @@ def orderservice(request, pk=None):
 
 
 def orderservices(request):
-    orderservices = OrdemServico.objects.all()
-    context = {'orderservices': orderservices}
+    context = {'lista': OrdemServico.objects.all(),}
     return render(request, 'orderservices.html', context)
 
 
@@ -35,14 +37,19 @@ def orderservice_add(request):
 
 
 def orderservice_edit(request, pk):
-    from django.http import HttpResponse
-
-    return HttpResponse('\o/ os edit')
+    orderservice = get_object_or_404(OrdemServico, pk=pk)
+    form = OrdemServicoForm(instance=orderservice)
+    context = {'form': form,
+               'orderservice_pk': pk,
+               'orderservice': orderservice,}
+    return render(request, 'orderservice_form.html', context)
 
 
 def orderservice_save(request, pk):
+    print "executando orderservice_save ..."
     form = OrdemServicoForm(request.POST)
     if not form.is_valid():
+        print "not form.is_valid()"
         return render(request, 'orderservice_form.html', {'form': form, })
 
     if int(pk) > 0:
@@ -50,6 +57,7 @@ def orderservice_save(request, pk):
         os.id = pk
 
     form.save()
+    print "save sucess!"
     return HttpResponseRedirect(reverse('orderservice_list'))
 
 
@@ -160,24 +168,24 @@ def equipe_save(request, pk):
         return render(request, 'equipe.html', {'form': form, })
 
     if int(pk) > 0:
-		equipe = form.save(commit=False)
-		equipe.id = pk
+        equipe = form.save(commit=False)
+        equipe.id = pk
 
     form.save()
     return HttpResponseRedirect(reverse('equipe_list'))
 
 def equipe_delete(request, pk):
-	equipe = get_object_or_404(Equipe, pk=pk)
-	if request.GET.get('confirm') == 'ok':
-		equipe.delete()
-		return HttpResponseRedirect(reverse('equipe_list'))
-	else:
-		context = {'model_name': 'Equipe',
-				   'model': equipe,
-				   'url_confirm': reverse('equipe_delete', args=[equipe.pk]),
-				   'url_cancel': reverse('equipe_list'),
-				   }
-		return render(request, 'base_delete.html', context)
+    equipe = get_object_or_404(Equipe, pk=pk)
+    if request.GET.get('confirm') == 'ok':
+        equipe.delete()
+        return HttpResponseRedirect(reverse('equipe_list'))
+    else:
+        context = {'model_name': 'Equipe',
+                   'model': equipe,
+                   'url_confirm': reverse('equipe_delete', args=[equipe.pk]),
+                   'url_cancel': reverse('equipe_list'),
+                   }
+    return render(request, 'base_delete.html', context)
 
 #=== Equipe ====================================================================================
 

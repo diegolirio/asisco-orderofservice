@@ -41,7 +41,7 @@ class OrdemServico(models.Model):
     entregaPrazo = models.CharField(u'Prazo de Entrega', max_length=50)
     entregaLugar = models.TextField(u'Lugar de Entrega')
     totalConjunto = models.IntegerField(u'Total de Conjuntos')
-    items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
+    #items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
     equipe = models.ForeignKey('Equipe')
 
 class OrdemServico_OrdemServicoItem(models.Model):
