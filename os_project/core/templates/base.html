@@ -16,7 +16,7 @@
             <!-- Bootstrap core CSS -->
             <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
             <!-- Custom styles for this template -->
-            <link href="navbar-fixed-top.css" rel="stylesheet">
+            <!-- <link href="navbar-fixed-top.css" rel="stylesheet"> -->
         {% endblock page_head_css %}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,6 +65,12 @@
                         <a href="{% url 'orderservice' 0 %}">
                             <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
                             Cadastro de Ordem de Serviço
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'service_list' %}">
+                            <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                            Cadastro de Serviços
                         </a>
                     </li>
                     <li class="divider"></li>

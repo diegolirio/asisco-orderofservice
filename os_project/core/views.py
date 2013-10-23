@@ -2,8 +2,8 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import OrdemServico, Cliente, Equipe, Membro
-from forms import OrdemServicoForm, ClienteForm, EquipeForm, MembroForm
+from models import OrdemServico, OrdemServicoItem, Cliente, Equipe, Membro
+from forms import OrdemServicoForm, ClienteForm, EquipeForm, MembroForm, OrdemServicoItemForm
 
 
 @login_required(login_url='/login/')
@@ -13,12 +13,9 @@ def home(request):
 
 #=== Ordem de Servicos =========================================================================
 def orderservice(request, pk=None):
-    print "orderservice..."
     if request.method == 'POST':
-        print "request.method == 'POST'"
         return orderservice_save(request, pk)
     else:
-        print "request.method == 'GET'"
         if int(pk) == 0:
             return orderservice_add(request)
         else:
@@ -38,10 +35,12 @@ def orderservice_add(request):
 
 def orderservice_edit(request, pk):
     orderservice = get_object_or_404(OrdemServico, pk=pk)
+    services = OrdemServicoItem.objects.all()
     form = OrdemServicoForm(instance=orderservice)
     context = {'form': form,
                'orderservice_pk': pk,
-               'orderservice': orderservice,}
+               'orderservice': orderservice,
+               'services': services,}
     return render(request, 'orderservice_form.html', context)
 
 
@@ -66,6 +65,62 @@ def orderservice_delete(request, pk):
 
 #=== Ordem de Servicos =========================================================================
 
+
+#=== Servicos ==================================================================================
+def services(request):
+    services = OrdemServicoItem.objects.all()
+    context = {'services': services, }
+    return render(request, 'service.html', context)
+
+def service(request, pk=0):
+    if request.method == 'POST':
+        return service_save(request, pk)
+    else:
+        if int(pk) == 0:
+            return service_add(request)
+        else:
+            return service_edit(request, pk)
+
+
+def service_add(request):
+    form = OrdemServicoItemForm()
+    context = {'form': form, }
+    return render(request, 'service.html', context)
+
+
+def service_edit(request, pk):
+    service = get_object_or_404(OrdemServicoItem, pk=pk)
+    form = OrdemServicoItemForm(instance=service)
+    context = {'form': form}
+    return render(request, 'service.html', context)
+
+
+def service_save(request, pk):
+    form = OrdemServicoItemForm(request.POST)
+    if not form.is_valid():
+        return render(request, 'service.html', {'form': form, })
+
+    if int(pk) > 0:
+        service = form.save(commit=False)
+        service.id = pk
+
+    form.save()
+    return HttpResponseRedirect(reverse('service_list'))
+
+
+def service_delete(request, pk):
+    service = get_object_or_404(OrdemServicoItem, pk=pk)
+    if request.GET.get('confirm') == 'ok':
+        service.delete()
+        return HttpResponseRedirect(reverse('service_list'))
+    else:
+        context = {'model_name': 'Serviço',
+                   'model': service,
+                   'url_confirm': reverse('service_delete', args=[service.pk]),
+                   'url_cancel': reverse('service_list'),
+        }
+        return render(request, 'base_delete.html', context)
+#=== Servicos ==================================================================================
 
 #=== Cliente ===================================================================================
 def clientes(request):

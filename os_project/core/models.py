@@ -13,15 +13,18 @@ class Pessoa(models.Model):
     def __unicode__(self):
         return self.nome
 
+
 class Cliente(Pessoa):
     tipo = models.CharField(max_length=3, choices=PESSOA_TIPO_CHOICES, default='CLI')
+
 
 class OrdemServicoItem(models.Model):
     numero = models.CharField(u'Numero de Desenvo/Conjunto/Peça', max_length=100) 
     denominacao = models.CharField(u'Denominação', max_length=200)
 
     def __unicode__(self):
-        "%s - %s" % (self.numero, self.denominacao)
+        return "%s - %s" % (self.numero, self.denominacao)
+
 
 class OrdemServico(models.Model):
     numero = models.CharField(u'Ordem de Serviço', max_length=50)
@@ -39,10 +42,11 @@ class OrdemServico(models.Model):
     revisaoData = models.DateTimeField(u'Data da Revisão')
     revisadoPor = models.ForeignKey('Pessoa', verbose_name=u'Revisado Por', related_name='os_revisadopor')
     entregaPrazo = models.CharField(u'Prazo de Entrega', max_length=50)
-    entregaLugar = models.TextField(u'Lugar de Entrega')
+    entregaLugar = models.CharField(u'Lugar de Entrega', max_length=250, blank=True)
     totalConjunto = models.IntegerField(u'Total de Conjuntos')
     #items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
     equipe = models.ForeignKey('Equipe')
+
 
 class OrdemServico_OrdemServicoItem(models.Model):
     ordemServico = models.ForeignKey('OrdemServico', related_name='osositem_os')

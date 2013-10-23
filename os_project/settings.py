@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'suit',
     'django.contrib.admin',
+    'south',
     'os_project.core',
 )
 
