@@ -12,7 +12,7 @@ def home(request):
     return render(request, 'index.html', context)
 
 #=== Ordem de Servicos =========================================================================
-def orderservice(request, pk=None):
+def orderservice(request, pk=0):
     if request.method == 'POST':
         return orderservice_save(request, pk)
     else:
@@ -28,19 +28,21 @@ def orderservices(request):
 
 
 def orderservice_add(request):
+    print "orderservice_add(request)..."
     form = OrdemServicoForm()
-    context = {'form': form, }
+    context = {'form': form}
     return render(request, 'orderservice_form.html', context)
 
 
 def orderservice_edit(request, pk):
+    print "orderservice_edit(request, pk)..."
     orderservice = get_object_or_404(OrdemServico, pk=pk)
     services = OrdemServicoItem.objects.all()
     form = OrdemServicoForm(instance=orderservice)
     context = {'form': form,
-               'orderservice_pk': pk,
+               'os_pk': pk,
                'orderservice': orderservice,
-               'services': services,}
+               'services': services}
     return render(request, 'orderservice_form.html', context)
 
 
@@ -72,30 +74,36 @@ def services(request):
     context = {'services': services, }
     return render(request, 'service.html', context)
 
-def service(request, pk=0):
+
+def service(request, os_pk, pk=0):
+    print "service(request, pk, os_pk):..."
     if request.method == 'POST':
-        return service_save(request, pk)
+        return service_save(request, os_pk, pk)
     else:
         if int(pk) == 0:
-            return service_add(request)
+            return service_add(request, os_pk)
         else:
-            return service_edit(request, pk)
+            return service_edit(request, os_pk, pk)
 
 
-def service_add(request):
+def service_add(request, os_pk):
     form = OrdemServicoItemForm()
-    context = {'form': form, }
+    context = {'form': form,
+               'os_pk': os_pk,
+               'pk': 0}
     return render(request, 'service.html', context)
 
 
-def service_edit(request, pk):
+def service_edit(request, os_pk, pk):
     service = get_object_or_404(OrdemServicoItem, pk=pk)
     form = OrdemServicoItemForm(instance=service)
-    context = {'form': form}
+    context = {'form': form,
+               'pk': pk,
+               'os_pk': os_pk}
     return render(request, 'service.html', context)
 
 
-def service_save(request, pk):
+def service_save(request, os_pk, pk=0):
     form = OrdemServicoItemForm(request.POST)
     if not form.is_valid():
         return render(request, 'service.html', {'form': form, })
@@ -105,7 +113,7 @@ def service_save(request, pk):
         service.id = pk
 
     form.save()
-    return HttpResponseRedirect(reverse('service_list'))
+    return HttpResponseRedirect(reverse('orderservice', args=[os_pk]))
 
 
 def service_delete(request, pk):

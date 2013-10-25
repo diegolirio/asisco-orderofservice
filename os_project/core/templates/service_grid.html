@@ -10,7 +10,7 @@
         {% for service in services %}
         <tr>
             <td>
-                <a href="{% url 'service_edit' service.pk %}">
+                <a href="{% url 'service_edit' os_pk service.pk %}">
                     {{service.id}}
                 </a>
             </td>
@@ -18,7 +18,7 @@
                 {{service.numero}}
             </td>
             <td>
-                <a href="{% url 'service_edit' service.pk %}">
+                <a href="{% url 'service_edit' os_pk service.pk %}">
                     {{service.denominacao}}
                 </a>
             </td>
@@ -30,7 +30,7 @@
                   </a>
                   <ul class="dropdown-menu">
                         <li>
-                            <a href="{% url 'service_edit' service.id %}">
+                            <a href="{% url 'service_edit' os_pk service.id %}">
                                 <span class="glyphicon glyphicon-edit"></span>
                                 &nbsp; Alterar
                             </a>

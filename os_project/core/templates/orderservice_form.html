@@ -103,16 +103,16 @@
                 <tr>
                     <td colspan="6" style="text-align: right;">
                         {% if services %}
-                            <a href="{% url 'service_add' %}" class="btn btn-primary" >
-                                <span class="glyphicon glyphicon-plus"></span>&nbsp;
-                                Adicionar Item
-                            </a>
+                        <a href="{% url 'service_add' os_pk %}" class="btn btn-default" >
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                            Adicionar Item
+                        </a>
                         {% endif %}
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-floppy-disk"></span>
                             Salvar
                         </button>
-                        <a href="{% url 'orderservice_list'  %}" class="btn btn-default">
+                        <a href="{% url 'orderservice_list' %}" class="btn btn-default">
                             <span class="glyphicon glyphicon-remove"></span>
                             Cancelar
                         </a>
@@ -126,7 +126,6 @@
             <h3>Itens</h3>
             {% include 'service_grid.html' %}
         {% endif %}
-
 
     </div>
     <!-- page_context ================================================================================== -->    

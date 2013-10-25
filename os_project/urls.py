@@ -12,8 +12,9 @@ urlpatterns = patterns('',
     url(r'^orderservice/(?P<pk>\d+)/$', 'os_project.core.views.orderservice', name='orderservice'),
 
     url(r'^service/list/$', 'os_project.core.views.services', name='service_list'),
-    url(r'^service/add/$', 'os_project.core.views.service', name='service_add'),
-    url(r'^service/edit/(?P<pk>\d+)/$', 'os_project.core.views.service', name='service_edit'),
+    url(r'^service/add/(?P<os_pk>\d+)/$', 'os_project.core.views.service', name='service_add'),
+    url(r'^service/edit/(?P<os_pk>\d+)/(?P<pk>\d+)/$', 'os_project.core.views.service', name='service_edit'),
+    url(r'^service/save/(?P<os_pk>\d+)/(?P<pk>\d+)/$', 'os_project.core.views.service', name='service_save'),
     url(r'^service/delete/conf/(?P<pk>\d+)/$', 'os_project.core.views.service_delete', name='service_delconf'),
     url(r'^service/delete/(?P<pk>\d+)/$', 'os_project.core.views.service_delete', name='service_delete'),
     
