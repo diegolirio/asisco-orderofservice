@@ -11,15 +11,15 @@
         <tr>
             <td>
                 <a href="{% url 'service_edit' os_pk service.pk %}">
-                    {{service.id}}
+                    {{service.item.id}}
                 </a>
             </td>
             <td>
-                {{service.numero}}
+                {{service.item.numero}}
             </td>
             <td>
                 <a href="{% url 'service_edit' os_pk service.pk %}">
-                    {{service.denominacao}}
+                    {{service.item.denominacao}}
                 </a>
             </td>
             <td style="text-align: center">

@@ -8,7 +8,7 @@ class OrdemServicoForm(ModelForm):
 
 class OrdemServicoItemForm(ModelForm):
     class Meta:
-        model = OrdemServicoItem
+        model = OrdemServico_OrdemServicoItem #OrdemServicoItem
 
 class ClienteForm(ModelForm):
 	class Meta:

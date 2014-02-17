@@ -9,8 +9,8 @@
         
         {% for item in lista %}
         <tr>
-            <td>{{item.numero}}</td>
-            <td>{{item.projetoNome}}</td>
+            <td><a href="{% url 'orderservice' item.id %}">{{item.numero}}</a></td>
+            <td><a href="{% url 'orderservice' item.id %}">{{item.projetoNome}}</a></td>
             <td>{{item.cliente}}</td>
             <td style="text-align: center">
                 <div class="btn-group">
@@ -19,7 +19,12 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                        <li><a href="{% url 'orderservice' item.id %}"><span class="glyphicon glyphicon-edit"></span>&nbsp; Alterar</a></li>
+                        <li>
+                            <a href="{% url 'orderservice' item.id %}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                                &nbsp; Alterar
+                            </a>
+                        </li>
                         <li><a href="#"><span class="glyphicon glyphicon-trash"></span>&nbsp; Excluir</a></li>
                   </ul>
                 </div>      

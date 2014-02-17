@@ -2,8 +2,9 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from models import OrdemServico, OrdemServicoItem, Cliente, Equipe, Membro
-from forms import OrdemServicoForm, ClienteForm, EquipeForm, MembroForm, OrdemServicoItemForm
+from models import *
+from forms import *
+import datetime
 
 
 @login_required(login_url='/login/')
@@ -30,6 +31,7 @@ def orderservices(request):
 def orderservice_add(request):
     print "orderservice_add(request)..."
     form = OrdemServicoForm()
+    services = OrdemServico_OrdemServicoItem.objects.all()
     context = {'form': form}
     return render(request, 'orderservice_form.html', context)
 
@@ -37,7 +39,7 @@ def orderservice_add(request):
 def orderservice_edit(request, pk):
     print "orderservice_edit(request, pk)..."
     orderservice = get_object_or_404(OrdemServico, pk=pk)
-    services = OrdemServicoItem.objects.all()
+    services = OrdemServico_OrdemServicoItem.objects.all()
     form = OrdemServicoForm(instance=orderservice)
     context = {'form': form,
                'os_pk': pk,
@@ -106,14 +108,17 @@ def service_edit(request, os_pk, pk):
 def service_save(request, os_pk, pk=0):
     form = OrdemServicoItemForm(request.POST)
     if not form.is_valid():
-        return render(request, 'service.html', {'form': form, })
+        return render(request, 'service.html', {'form': form, 'os_pk': os_pk,})
 
     if int(pk) > 0:
         service = form.save(commit=False)
         service.id = pk
 
+    #model = form.save(commit=False)
+    #dtRec = datetime.datetime.utcnow().replace(tzinfo=utc)
+    #model.dataRecebimento = dtRec
     form.save()
-    return HttpResponseRedirect(reverse('orderservice', args=[os_pk]))
+    return HttpResponseRedirect(reverse('orderservice', args=(1,)))
 
 
 def service_delete(request, pk):

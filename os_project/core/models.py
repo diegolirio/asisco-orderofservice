@@ -1,5 +1,6 @@
 # coding: utf-8
 from django.db import models
+from django.utils import timezone
 
 PESSOA_TIPO_CHOICES = (
         ('CLI', u'Cliente'),
@@ -44,7 +45,7 @@ class OrdemServico(models.Model):
     entregaPrazo = models.CharField(u'Prazo de Entrega', max_length=50)
     entregaLugar = models.CharField(u'Lugar de Entrega', max_length=250, blank=True)
     totalConjunto = models.IntegerField(u'Total de Conjuntos')
-    #items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
+    items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem')
     equipe = models.ForeignKey('Equipe')
 
 
@@ -56,7 +57,7 @@ class OrdemServico_OrdemServicoItem(models.Model):
     observacoes = models.TextField(u'Observações')
     fabricar = models.BooleanField(u'Fabricar ?')
     fabricarQuantidade = models.IntegerField(u'Quantidade Fabricar')
-    dataRecebimento = models.DateTimeField(u'Data de Recebimento')    
+    dataRecebimento = models.DateTimeField(u'Data de Recebimento', default=timezone.now)    
 
     def __unicode__(self):
         return "%s - %s" % (self.ordemServico.projetoNome, self.item.denominacao)
