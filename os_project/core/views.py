@@ -35,6 +35,12 @@ def orderservice_add(request):
     context = {'form': form}
     return render(request, 'orderservice_form.html', context)
 
+def print_os(request, pk):
+    orderservice = get_object_or_404(OrdemServico, pk=pk)
+    items = OrdemServico_OrdemServicoItem.objects.all()
+    context = {'orderservice': orderservice,
+               'items': items,}
+    return render(request, 'planilha.html', context)
 
 def orderservice_edit(request, pk):
     print "orderservice_edit(request, pk)..."

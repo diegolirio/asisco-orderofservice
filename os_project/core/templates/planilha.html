@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+	
+	<div class="container">
+
+		<div class="row">	
+			<div class="span9">	
+				<table border="1" class="table">
+					<tr>
+						<td style="width: 120px;" rowspan="3">
+							<br/>
+							<img src="{{STATIC_URL}}img/logo.jpg"/>
+						</td>
+						<td colspan="3" rowspan="3">
+							<center>
+								<h3>Ordem de serviço</h3>
+							</center>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b>Realizado por: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.realizadoPor }}
+							</span>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b>Data: </b>
+							</span>
+							<span class="text-info text-mini">
+								{{ orderservice.realizadoData|date:"d/m/Y H:m"}}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="text-mini">
+								<b>Verificado por: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.verificadoPor }}
+							</span>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b>Data: </b>
+							</span>
+							<span class="text-info text-mini">
+								{{ orderservice.verificadoData|date:"d/m/Y H:m"}}
+							</span>
+						</td>
+					</tr>			
+					<tr>
+						<td colspan="2">
+							<span class="text-mini">
+								<b>Resp. Projeto: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.responsavel }}
+							</span>
+						</td>
+					</tr>								
+				</table>
+			</div>
+			<div class="span3">	
+				<table border="1" class="table">
+					<tr>
+						<td>Revisao: </td>
+						<td>
+							<span class="text-mini text-info">
+								{{ orderservice.revisao }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>Data: </td>
+						<td>
+							<span class="text-mini text-info">
+								{{ orderservice.revisaoData|date:"d/m/Y H:m"}}
+							</span>
+						</td>
+					</tr>			
+					<tr>
+						<td>
+							<span class="text-mini">Rev. POR: </span>
+						</td>
+						<td>
+							<span class="text-info">
+								{{ orderservice.revisadoPor }}
+							</span>
+						</td>
+					</tr>								
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<table border="1" class="table">
+					<tr>
+						<td>
+							<span class="text-mini">
+								<b>Nº de OP: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.numeroOP }}
+							</span>
+						</td>
+						<td colspan="3">
+							<span class="text-mini">
+								<b>PROJETO: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.projetoNome }}
+							</span>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b><center>LM</center></b>
+							</span></td>
+						<td>
+							<span class="text-mini">
+								<b>Entrega</b>
+							</span>
+						</td>
+						<td style="text-align: center;">
+							<span class="text-mini">
+								<b>Total</b>
+							</span>
+						</td>
+						<td rowspan="5" style="text-align: center;">
+							<br/>
+							<span class="text-mini">
+								<b>Ordem de servico</b>
+							</span>
+							<br/><br/>
+							<span class="text-info">
+								{{ orderservice.numero }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="text-mini">
+								<b>Cliente: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.cliente }}
+							</span>
+						</td>
+						<td colspan="3">
+							<span class="text-mini">
+								<b>EQUIPAMENTO: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.equipamento }}
+							</span>
+						</td>
+						<td rowspan="2" style="text-align: center;">
+							<span class="text-info">
+								Lista de materias
+							</span>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b>Prazo: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.entregaPrazo }}
+							</span>
+						</td>
+						<td rowspan="2" style="text-align: center;">
+							<span class="text-mini">
+								<b>Conjuntos</b>
+							</span>
+							<br/><br/>
+							{{ orderservice.totalConjunto }}
+						</td>
+					</tr>			
+					<tr>
+						<td></td>
+						<td colspan="3">
+							<span class="text-mini">
+								<b>REF./Nº DE DESENHO: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.referencia }}
+							</span>
+						</td>
+						<td>
+							<span class="text-mini">
+								<b>Lugar: </b>
+							</span>
+							<span class="text-info">
+								{{ orderservice.entregaLugar }}
+							</span>
+						</td>
+					</tr>								
+				</table>				
+			</div>
+		</div>
+		<div class="row">
+			<div class="span12">
+				<table border="1" class="table">
+					<tr>
+						<td rowspan="2"><span class="text-mini"><b>Nº DE DESENHO CONJUNTO / PEÇA</b></span></td>
+						<td rowspan="2"><span class="text-mini"><b>DENOMINAÇÃO</b></span></td>
+						<td rowspan="2"><span class="text-mini"><b>QUANTIDADE</b></span></td>
+						<td rowspan="2"><span class="text-mini"><b>ACABAMENTO/RAL</b></span></td>
+						<td rowspan="2"><span class="text-mini"><b>OBSERVAÇÕES</b></span></td>
+						<td colspan="2"><span class="text-mini"><b>FABRICAR</b></span></td>
+						<td><span class="text-mini"><b>DATA</b></span></td>
+					</tr>					
+					<tr>
+						<td><span class="text-mini"><b>Sim/Não</b></span></td>
+						<td><span class="text-mini"><b>Qtde</b></span></td>
+						<td><span class="text-mini"><b>Recebimento</b></span></td>
+					</tr>
+
+					{% for it in items %}										
+						<tr class="text-info">
+							<td>{{it.item.numero}}</td>
+							<td>{{it.item.denominacao}}</td>
+							<td>{{it.quantidade}}</td>
+							<td>{{it.acabamento}}</td>
+							<td>{{it.observacoes}}</td>
+							<td>{{it.fabricar}}</td>
+							<td>{{it.fabricarQuantidade}}</td>
+							<td>{{it.dataRecebimento|date:"d/m/Y H:m"}}</td>
+						</tr>					
+					{% endfor %}
+																			
+				</table>
+			</div>
+		</div>	
+
+	</div>
+	
+	
+{% endblock page_context %}

@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     url(r'^orderservice/list/$', 'os_project.core.views.orderservices', name='orderservice_list'),
     url(r'^orderservice/(?P<pk>\d+)/$', 'os_project.core.views.orderservice', name='orderservice'),
+    url(r'^orderservice/print_os/(?P<pk>\d+)/$', 'os_project.core.views.print_os', name='print_os'),
 
     url(r'^service/list/$', 'os_project.core.views.services', name='service_list'),
     url(r'^service/add/(?P<os_pk>\d+)/$', 'os_project.core.views.service', name='service_add'),

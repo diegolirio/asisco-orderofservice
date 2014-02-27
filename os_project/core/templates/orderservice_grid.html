@@ -25,7 +25,18 @@
                                 &nbsp; Alterar
                             </a>
                         </li>
-                        <li><a href="#"><span class="glyphicon glyphicon-trash"></span>&nbsp; Excluir</a></li>
+                        <li>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-trash"></span>
+                                &nbsp; Excluir
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'print_os' item.id %}">
+                                <span class="glyphicon glyphicon-print"></span>
+                                &nbsp; Imprimir
+                            </a>
+                        </li>                  
                   </ul>
                 </div>      
             </td> 

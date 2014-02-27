@@ -9,7 +9,7 @@ import dj_database_url
 from unipath import Path
 PROJECT_DIR = Path(__file__).parent
 
-DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG = True #os.environ.get('DEBUG') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 # Usar o South para preparar o banco nos tests?
