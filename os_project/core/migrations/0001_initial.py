@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from south.utils import datetime_utils as datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
@@ -48,7 +48,7 @@ class Migration(SchemaMigration):
             ('revisaoData', self.gf('django.db.models.fields.DateTimeField')()),
             ('revisadoPor', self.gf('django.db.models.fields.related.ForeignKey')(related_name='os_revisadopor', to=orm['core.Pessoa'])),
             ('entregaPrazo', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('entregaLugar', self.gf('django.db.models.fields.TextField')()),
+            ('entregaLugar', self.gf('django.db.models.fields.CharField')(max_length=250, blank=True)),
             ('totalConjunto', self.gf('django.db.models.fields.IntegerField')()),
             ('equipe', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Equipe'])),
         ))
@@ -64,7 +64,7 @@ class Migration(SchemaMigration):
             ('observacoes', self.gf('django.db.models.fields.TextField')()),
             ('fabricar', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('fabricarQuantidade', self.gf('django.db.models.fields.IntegerField')()),
-            ('dataRecebimento', self.gf('django.db.models.fields.DateTimeField')()),
+            ('dataRecebimento', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
         ))
         db.send_create_signal(u'core', ['OrdemServico_OrdemServicoItem'])
 
@@ -127,11 +127,12 @@ class Migration(SchemaMigration):
         u'core.ordemservico': {
             'Meta': {'object_name': 'OrdemServico'},
             'cliente': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'os_cliente'", 'to': u"orm['core.Cliente']"}),
-            'entregaLugar': ('django.db.models.fields.TextField', [], {}),
+            'entregaLugar': ('django.db.models.fields.CharField', [], {'max_length': '250', 'blank': 'True'}),
             'entregaPrazo': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'equipamento': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'equipe': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.Equipe']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'items': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['core.OrdemServicoItem']", 'null': 'True', 'through': u"orm['core.OrdemServico_OrdemServicoItem']", 'blank': 'True'}),
             'numero': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'numeroOP': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'projetoNome': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
@@ -149,7 +150,7 @@ class Migration(SchemaMigration):
         u'core.ordemservico_ordemservicoitem': {
             'Meta': {'object_name': 'OrdemServico_OrdemServicoItem'},
             'acabamento': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'dataRecebimento': ('django.db.models.fields.DateTimeField', [], {}),
+            'dataRecebimento': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
             'fabricar': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'fabricarQuantidade': ('django.db.models.fields.IntegerField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),

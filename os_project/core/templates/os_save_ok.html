@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+<div class="container">
+    <div class="alert alert-info">
+        Ordem de Serviço: <strong>[ {{os.numero}} - {{os.projetoNome}} ]</strong> 
+        <br>
+        salva com sucesso!
+    </div>
+    
+    <h4>
+        Deseja adicionar Items para esta Ordem de Serviço agora?
+    <h4>
+
+    <br>
+    <a href="{% url 'service_add' os.id %}" class="btn btn-primary">
+        <span class="glyphicon glyphicon-floppy-disk"></span>
+        Sim
+    </a>
+
+    <a href="{% url 'orderservice_list' %}" class="btn btn-danger">
+        <span class="glyphicon glyphicon-remove"></span>
+        Não
+    </a>                            
+
+</div>
+{% endblock page_context %}

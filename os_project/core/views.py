@@ -45,7 +45,7 @@ def print_os(request, pk):
 def orderservice_edit(request, pk):
     print "orderservice_edit(request, pk)..."
     orderservice = get_object_or_404(OrdemServico, pk=pk)
-    services = OrdemServico_OrdemServicoItem.objects.all()
+    services = orderservice.osositem_os.all()
     form = OrdemServicoForm(instance=orderservice)
     context = {'form': form,
                'os_pk': pk,
@@ -54,20 +54,20 @@ def orderservice_edit(request, pk):
     return render(request, 'orderservice_form.html', context)
 
 
-def orderservice_save(request, pk):
-    print "executando orderservice_save ..."
-    form = OrdemServicoForm(request.POST)
+def orderservice_save(request, pk=0):
+    form = OrdemServicoForm(request.POST, request.FILES)
     if not form.is_valid():
-        print "not form.is_valid()"
         return render(request, 'orderservice_form.html', {'form': form, })
 
+    os = form.save(commit=False)
     if int(pk) > 0:
-        os = form.save(commit=False)
         os.id = pk
 
-    form.save()
-    print "save sucess!"
-    return HttpResponseRedirect(reverse('orderservice_list'))
+    os.save()
+    #return HttpResponseRedirect(reverse('service_add', args=(os.id,)))
+    context = {'os': os}
+    return render(request, 'os_save_ok.html', context)
+
 
 
 def orderservice_delete(request, pk):
@@ -116,15 +116,16 @@ def service_save(request, os_pk, pk=0):
     if not form.is_valid():
         return render(request, 'service.html', {'form': form, 'os_pk': os_pk,})
 
+    service = form.save(commit=False)
     if int(pk) > 0:
-        service = form.save(commit=False)
         service.id = pk
 
     #model = form.save(commit=False)
     #dtRec = datetime.datetime.utcnow().replace(tzinfo=utc)
     #model.dataRecebimento = dtRec
-    form.save()
-    return HttpResponseRedirect(reverse('orderservice', args=(1,)))
+    service.ordemServico_id = os_pk
+    service.save()
+    return HttpResponseRedirect(reverse('orderservice', args=(os_pk,)))
 
 
 def service_delete(request, pk):

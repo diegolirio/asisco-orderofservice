@@ -9,6 +9,7 @@ class OrdemServicoForm(ModelForm):
 class OrdemServicoItemForm(ModelForm):
     class Meta:
         model = OrdemServico_OrdemServicoItem #OrdemServicoItem
+        exclude = ('ordemServico',)
 
 class ClienteForm(ModelForm):
 	class Meta:
