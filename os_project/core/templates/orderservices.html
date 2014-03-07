@@ -13,7 +13,9 @@
         <br>
         <br>
         {% if lista %}
+        <div style="width: 100%; height: 350px; overflow-y: scroll;">
             {% include 'orderservice_grid.html' %}
+        </div>
         {% else %}
             <p>
             	<span class="label label-danger">Nenhuma Ordem de Serviço cadastrada até o momento!</span>

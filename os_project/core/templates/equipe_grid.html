@@ -9,36 +9,27 @@
         {% for equipe in equipes %}
         <tr>
             <td>
-                <a href="{% url 'equipe_edit' equipe.pk %}">
+                <a href="{% url 'equipe_edit' equipe.pk %}" data-toggle="tooltip" 
+                    title="[ Alterar ] Equipe...">
                     {{equipe.id}}
                 </a>
             </td>
             <td>
-                <a href="{% url 'equipe_edit' equipe.pk %}">
+                <a href="{% url 'equipe_edit' equipe.pk %}" data-toggle="tooltip" 
+                    title="[ Alterar ] Equipe...">
                     {{equipe.nome}}
                 </a>
             </td>
             <td style="text-align: center">
-                <div class="btn-group">
-                  <a class="btn dropdown-toggle btn-small btn-default" data-toggle="dropdown" href="#">
-                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                        <li>
-                            <a href="{% url 'equipe_edit' equipe.id %}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                &nbsp; Alterar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'equipe_delconf' equipe.id %}">
-                                <span class="glyphicon glyphicon-trash"></span>
-                                &nbsp; Excluir
-                            </a>
-                        </li>
-                  </ul>
-                </div>      
+                <a href="{% url 'equipe_edit' equipe.id %}" data-toggle="tooltip" 
+                    title="[ Alterar ] Equipe...">
+                    <span class="glyphicon glyphicon-edit"></span>                    
+                </a>
+                &nbsp;
+                <a href="{% url 'equipe_delconf' equipe.id %}" data-toggle="tooltip" 
+                    title="[ Excluir ] Equipe...">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>    
             </td>   
         </tr>
         {% endfor %}

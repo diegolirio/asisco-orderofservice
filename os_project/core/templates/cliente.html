@@ -9,13 +9,14 @@
 
         {% if form %}
             {% include 'cliente_form.html' %}
+            <br>
         {% else %}
 
             <a href="{% url 'cliente_add' %}" class="btn btn-primary" >
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;
                 Adicionar novo Cliente
             </a>
-            <hr>
+            <br><br>
 
             {% if clientes %}
                 {% include 'cliente_grid.html' %}

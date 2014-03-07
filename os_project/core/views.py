@@ -266,9 +266,9 @@ def equipe_delete(request, pk):
 
 #=== Membro ====================================================================================
 def membros(request):
-	membros = Membro.objects.all()
-	context = {'membros': membros,}
-	return render(request, 'membro.html', context)
+    membros = Membro.objects.all()
+    context = {'membros': membros, }
+    return render(request, 'membro.html', context)
 
 def membro(request, pk=0):
 	if request.method == 'POST':

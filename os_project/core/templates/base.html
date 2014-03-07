@@ -155,11 +155,15 @@
     <!-- Modal =================================================================================== -->
 
     {% block page_body_js %}
-        <!-- Bootstrap core JavaScript ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="{{STATIC_URL}}js/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
-        <!-- Bootstrap core JavaScript ================================================== -->
+        <script src="{{STATIC_URL}}js/tooltip.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+              $('span').tooltip();
+              $('a').tooltip();
+            });
+        </script>         
     {% endblock page_body_js %}
 
 {% endblock page_body %}

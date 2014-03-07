@@ -9,7 +9,9 @@
             <h1>OrderOfService</h1>
             <p>Controle de Ordem de Serviços</p>
             <p>
-                <a class="btn btn-lg btn-primary" href="{% url 'orderservice' 0 %}">
+                <a class="btn btn-lg btn-primary" href="{% url 'orderservice' 0 %}"
+                    data-toggle="tooltip" data-placement="right" 
+                    title="[ Cadastrar ] Order de Serviço...">
                     <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
                     Cadastrar Order de Serviço &raquo;
                 </a>
@@ -17,11 +19,14 @@
         </div>        
 
         {% if lista %}
+        <div style="width: 100%; height: 180px; overflow-y: scroll;">
             {% include 'orderservice_grid.html' %}
+        </div>    
         {% else %}
             <p>Nenhuma Ordem de Serviço cadastrada até o momento!</p>
         {% endif %}
 
     </div> <!-- /container -->
     <!-- page_context ============================================================================ -->        
-    {% endblock page_context %}
+{% endblock page_context %}
+

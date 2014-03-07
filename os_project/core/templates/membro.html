@@ -9,12 +9,14 @@
 
         {% if form %}
             {% include 'membro_form.html' %}
+            <br>
         {% else %}
 
             <a href="{% url 'membro_add' %}" class="btn btn-primary" >
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;
-                Adicionar novo Membro</a>
-            <hr>        
+                Adicionar novo Membro
+            </a>
+            <br><br>        
 
             {% if membros %}
                 {% include 'membro_grid.html' %}

@@ -1,4 +1,3 @@
-<div style="width: 100%; height: 150px; overflow-y: scroll;">
 <table class="table table-striped table-hover table-condensed table-bordered">
     <thead>
         <th>Numero</th>
@@ -10,51 +9,33 @@
         
         {% for item in lista %}
         <tr>
-            <td><a href="{% url 'orderservice' item.id %}">{{item.numero}}</a></td>
-            <td><a href="{% url 'orderservice' item.id %}">{{item.projetoNome}}</a></td>
+            <td>
+                <a href="{% url 'orderservice' item.id %}" data-toggle="tooltip" 
+                        title="[ Alterar ] Order de Serviço...">
+                    {{item.numero}}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'orderservice' item.id %}" data-toggle="tooltip" 
+                        title="[ Alterar ] Order de Serviço...">
+                    {{item.projetoNome}}
+                </a>
+            </td>
             <td>{{item.cliente}}</td>
             <td style="text-align: center">
-                <!-- 
-                <div class="btn-group">
-                  <a class="btn dropdown-toggle btn-small btn-default" data-toggle="dropdown" href="#">
-                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                        <li>
-                            <a href="{% url 'orderservice' item.id %}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                &nbsp; Alterar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="glyphicon glyphicon-trash"></span>
-                                &nbsp; Excluir
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'print_os' item.id %}">
-                                <span class="glyphicon glyphicon-print"></span>
-                                &nbsp; Imprimir
-                            </a>
-                        </li>                  
-                  </ul>
-                </div>      
-                -->
                 <a href="{% url 'orderservice' item.id %}">
-                    <span class="glyphicon glyphicon-edit"></span>
-                    Alterar
+                    <span class="glyphicon glyphicon-edit" data-toggle="tooltip" 
+                        title="[ Alterar ] Order de Serviço..."></span>
                 </a>
                 &nbsp; 
                 <a href="#">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Excluir
+                    <span class="glyphicon glyphicon-trash" data-toggle="tooltip" 
+                        title="[ Excluir ] Order de Serviço..."></span>                    
                 </a>  
                 &nbsp; 
                 <a href="{% url 'print_os' item.id %}">
-                    <span class="glyphicon glyphicon-print"></span>
-                    Imprimir
+                    <span class="glyphicon glyphicon-print" data-toggle="tooltip" 
+                        title="[ Imprimir ] Order de Serviço..."></span>                    
                 </a>                                      
             </td> 
         </tr>
@@ -62,4 +43,3 @@
 
     </tbody>
 </table>
-</div>

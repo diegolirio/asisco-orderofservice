@@ -9,22 +9,28 @@
 
         {% if form %}
             {% include 'equipe_form.html' %}
-            <hr>
-            <span class="glyphicon glyphicon-plus"></span>
-            <a href="{% url 'membro_add_equipe' %}?equipe={{ equipe_pk }}"
-               onclick="show_popup_membro(this.href); return false;">Adicionar novo membro</a>
+            {% if equipe_pk %}
+                <hr>                            
+                <a href="{% url 'membro_add_equipe' %}?equipe={{ equipe_pk }}"
+                   onclick="show_popup_membro(this.href); return false;" 
+                   class="btn btn-info">
+                   <span class="glyphicon glyphicon-plus"></span>
+                   Adicionar novo membro
+               </a>
 
-            {% if membros %}
-                <br><br>
-                {% include 'membro_grid.html' %}
-            {% endif  %}
-
+                {% if membros %}
+                    <br><br>
+                    <div style="width: 100%; height: 200px; overflow-y: scroll;">
+                        {% include 'membro_grid.html' %}
+                    </div>
+                {% endif  %}
+            {% endif %}
         {% else %}
 
             <a href="{% url 'equipe_add' %}" class="btn btn-primary" >
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;
                 Adicionar nova Equipe</a>
-            <hr>
+            <br><br>
 
             {% if equipes %}
                 {% include 'equipe_grid.html' %}
@@ -44,7 +50,7 @@
         w = window.open(
             url,
             '',
-            'height=280, width=400, top=50, left=250, scrollbars=no, resizable=no');
+            'height=300, width=400, top=150, left=50, scrollbars=no, resizable=no');
     }
 </script>
 
