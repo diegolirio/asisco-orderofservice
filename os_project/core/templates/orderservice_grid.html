@@ -28,15 +28,20 @@
                         title="[ Alterar ] Order de Serviço..."></span>
                 </a>
                 &nbsp; 
-                <a href="#">
+                <a href="{% url 'orderservice_delconf' item.id %}">
                     <span class="glyphicon glyphicon-trash" data-toggle="tooltip" 
                         title="[ Excluir ] Order de Serviço..."></span>                    
                 </a>  
                 &nbsp; 
-                <a href="{% url 'print_os' item.id %}">
+                <a href="javascript:frame_impressao.print()">
                     <span class="glyphicon glyphicon-print" data-toggle="tooltip" 
                         title="[ Imprimir ] Order de Serviço..."></span>                    
-                </a>                                      
+                </a>        
+
+                <iframe name='frame_impressao' id='frame_impressao' height='0' 
+                    width='0' src="{% url 'print_os' item.id %}" frameborder=' '>
+                </iframe>
+
             </td> 
         </tr>
         {% endfor %}

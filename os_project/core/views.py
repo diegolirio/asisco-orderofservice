@@ -12,6 +12,7 @@ def home(request):
     context = {'lista': OrdemServico.objects.all(), }
     return render(request, 'index.html', context)
 
+
 #=== Ordem de Servicos =========================================================================
 def orderservice(request, pk=0):
     if request.method == 'POST':
@@ -37,7 +38,11 @@ def orderservice_add(request):
 
 def print_os(request, pk):
     orderservice = get_object_or_404(OrdemServico, pk=pk)
+    print "orderservice: %s" % orderservice
+    
     items = OrdemServico_OrdemServicoItem.objects.all()
+    print "items.count(): %s" % items.count()
+
     context = {'orderservice': orderservice,
                'items': items,}
     return render(request, 'planilha.html', context)
@@ -71,7 +76,18 @@ def orderservice_save(request, pk=0):
 
 
 def orderservice_delete(request, pk):
-    pass
+    orderservice = get_object_or_404(OrdemServico, pk=pk)
+    if request.GET.get('confirm') == 'ok':
+        orderservice.delete()
+        return HttpResponseRedirect(reverse('orderservice_list'))
+    else:
+        context = {'model_name': 'Ordem de Serviço',
+                   'model': orderservice,
+                   'url_confirm': reverse('orderservice_delete', args=[orderservice.pk]),
+                   'url_cancel': reverse('orderservice_list'),
+        }
+        return render(request, 'base_delete.html', context)
+    
 
 #=== Ordem de Servicos =========================================================================
 
@@ -161,7 +177,8 @@ def cliente(request, pk=0):
 
 def cliente_add(request):
     form = ClienteForm()
-    context = {'form': form, }
+    who_called = request.GET.get('who_called')
+    context = {'form': form, 'who_called': who_called, }
     return render(request, 'cliente.html', context)
 
 
@@ -174,14 +191,22 @@ def cliente_edit(request, pk):
 
 def cliente_save(request, pk):
     form = ClienteForm(request.POST)
+    who_called = request.POST.get('who_called')
     if not form.is_valid():
-        return render(request, 'cliente.html', {'form': form, })
+        return render(request, 'cliente.html', {'form': form, 'who_called': 'show'})
 
     if int(pk) > 0:
         cliente = form.save(commit=False)
         cliente.id = pk
 
     form.save()
+
+    # tratamento p/ quando for chamado por popup =======================#    
+    if who_called:
+        return render(request, 'cliente.html', 
+            {'clientes': Cliente.objects.all(), 'who_called': 'close'})
+    #===================================================================#
+
     return HttpResponseRedirect(reverse('cliente_list'))
 
 
@@ -221,8 +246,8 @@ def equipe(request, pk=0):
 
 def equipe_add(request):
     form = EquipeForm()
-    context = {'equipes': equipes,
-               'form': form}
+    who_called = request.GET.get('who_called')
+    context = {'equipes': equipes, 'form': form, 'who_called': who_called,}
     return render(request, 'equipe.html', context)
 
 
@@ -239,14 +264,23 @@ def equipe_edit(request, pk):
 
 def equipe_save(request, pk):
     form = EquipeForm(request.POST)
+    who_called = request.POST.get('who_called')
     if not form.is_valid():
-        return render(request, 'equipe.html', {'form': form, })
+        return render(request, 'equipe.html', {'form': form, 'who_called': who_called,})
 
     if int(pk) > 0:
         equipe = form.save(commit=False)
         equipe.id = pk
 
     form.save()
+
+    # tratamento p/ quando for chamado por popup =======================    
+    if who_called:
+        return render(request, 'equipe.html', 
+            {'membros': Equipe.objects.all(), 'who_called': 'close'})
+    #===================================================================
+
+
     return HttpResponseRedirect(reverse('equipe_list'))
 
 def equipe_delete(request, pk):
@@ -280,15 +314,24 @@ def membro(request, pk=0):
 			return membro_edit(request, pk)
 
 def membro_save(request, pk):
-	form = MembroForm(request.POST)
-	if not form.is_valid():
-		return render(request, 'membro.html', {'form': form})
+    form = MembroForm(request.POST)
+    who_called = request.POST.get('who_called')
 
-	if int(pk) > 0:
-		membro = form.save(commit=False)
-		membro.id = pk
+    if not form.is_valid():
+        return render(request, 'membro.html', {'form': form, 'who_called': 'show'})
 
-	form.save()
+    if int(pk) > 0:
+        membro = form.save(commit=False)
+        membro.id = pk
+
+    form.save()
+
+    # tratamento p/ quando for chamado por popup =======================    
+    if who_called:
+        return render(request, 'membro.html', 
+            {'membros': Membro.objects.all(), 'who_called': 'close'})
+    #===================================================================
+
 	return HttpResponseRedirect(reverse('membro_list'))
 
 def membro_edit(request, pk):
@@ -299,8 +342,8 @@ def membro_edit(request, pk):
 
 def membro_add(request):
     form = MembroForm()
-    context = {'membros': membros,
-			   'form': form,}
+    who_called = request.GET.get('who_called')
+    context = {'membros': membros, 'form': form, 'who_called': who_called,}
     return render(request, 'membro.html', context)
 
 def membro_add_equipe(request):

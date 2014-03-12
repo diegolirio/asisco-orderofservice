@@ -61,6 +61,9 @@ class OrdemServico(models.Model):
     items = models.ManyToManyField(OrdemServicoItem, through='OrdemServico_OrdemServicoItem', null=True, blank=True)
     equipe = models.ForeignKey('Equipe')
 
+    def __unicode__(self):
+        return "%s - %s" % (self.projetoNome, self.numero)
+
 
 class OrdemServico_OrdemServicoItem(models.Model):
     ordemServico = models.ForeignKey('OrdemServico', related_name='osositem_os')

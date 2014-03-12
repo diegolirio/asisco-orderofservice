@@ -19,7 +19,9 @@
             <br><br>        
 
             {% if membros %}
+            <div style="width: 100%; height: 370px; overflow-y: scroll;">
                 {% include 'membro_grid.html' %}
+            </div>
             {% else %}
                 <p>
                     <span class="label label-danger">Nenhum Cliente cadastrado até o momento!</span>
@@ -29,5 +31,18 @@
         {% endif %}
 
     </div>
+
+<script type="text/javascript">
+    
+    {% if who_called == 'close' %}
+        close_delete();
+    {% endif %}
+    
+    function close_delete() {   
+        window.opener.location.reload();
+        window.close(); 
+    }
+</script>
+
 
 {% endblock page_context %}

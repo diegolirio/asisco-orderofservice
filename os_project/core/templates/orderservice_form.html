@@ -35,7 +35,14 @@
                     <td style="text-align: right;">
                         <label for="id_cliente">{{ form.cliente.label }}:</label>
                     </td>
-                    <td>{{ form.cliente }}{{ form.cliente.errors }}</td>
+                    <td>
+                        {{ form.cliente }}
+                        {{ form.cliente.errors }}
+                        <a href="{% url 'cliente_add' %}?who_called=os"
+                           onclick="show_popup_cliente(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align: right;">
@@ -55,7 +62,14 @@
                     <td style="text-align: right;">
                         <label for="id_realizadoPor">{{ form.realizadoPor.label }}:</label>
                     </td>
-                    <td>{{ form.realizadoPor }}{{ form.realizadoPor.errors }}</td>
+                    <td>
+                        {{ form.realizadoPor }}
+                        {{ form.realizadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
                     <td style="text-align: right;">
                         <label for="id_realizadoData">{{ form.realizadoData.label }}:</label>
                     </td>
@@ -63,7 +77,14 @@
                     <td  style="text-align: right;">
                         <label for="id_verificadoPor">{{ form.verificadoPor.label }}:</label>
                     </td>
-                    <td>{{ form.verificadoPor }}{{ form.verificadoPor.errors }}</td>
+                    <td>
+                        {{ form.verificadoPor }}
+                        {{ form.verificadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
                 </tr>
                 <tr>
                     <td style="text-align: right;">
@@ -73,7 +94,14 @@
                     <td style="text-align: right;">
                         <label for="id_responsavel">{{ form.responsavel.label }}:</label>
                     </td>
-                    <td>{{ form.responsavel }}{{ form.responsavel.errors }}</td>
+                    <td>
+                        {{ form.responsavel }}
+                        {{ form.responsavel.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
                     <td style="text-align: right;">
                         <label for="id_revisao">{{ form.revisao.label }}:</label>
                     </td>
@@ -87,7 +115,14 @@
                     <td style="text-align: right;">
                         <label for="id_revisadoPor">{{ form.revisadoPor.label }}:</label>
                     </td>
-                    <td>{{ form.revisadoPor }}{{ form.revisadoPor.errors }}</td>
+                    <td>
+                        {{ form.revisadoPor }}
+                        {{ form.revisadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
                     <td style="text-align: right;">
                         <label for="id_totalConjunto">{{ form.totalConjunto.label }}:</label>
                     </td>
@@ -97,7 +132,14 @@
                     <td style="text-align: right;">
                         <label for="id_equipe">{{ form.equipe.label }}:</label>
                     </td>
-                    <td>{{ form.equipe }}{{ form.equipe.errors }}</td>
+                    <td>
+                        {{ form.equipe }}
+                        {{ form.equipe.errors }}
+                        <a href="{% url 'equipe_add' %}?who_called=os"
+                           onclick="show_popup_equipe(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
                     <td style="text-align: right;">
                         <label for="id_entregaPrazo">{{ form.entregaPrazo.label }}:</label>
                     </td>
@@ -108,7 +150,6 @@
                         <label for="id_entregaLugar">{{ form.entregaLugar.label }}:</label><br>
                     </td>
                     <td colspan="5">
-{#                        <textarea cols="130" id="id_entregaLugar" name="entregaLugar" rows="3"></textarea>#}
                         {{ form.entregaLugar }}
                         {{ form.entregaLugar.errors }}
                     </td>
@@ -141,5 +182,28 @@
         {% endif %}
 
     </div>
+
+<script type="text/javascript">
+    function show_popup_cliente(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=700, scrollbars=no, resizable=no');
+    }
+    function show_popup_membro(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=50, scrollbars=no, resizable=no');
+    }
+    function show_popup_equipe(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=350, scrollbars=no, resizable=no');
+    }
+</script>
+
     <!-- page_context ================================================================================== -->    
 {% endblock page_context %}
+
