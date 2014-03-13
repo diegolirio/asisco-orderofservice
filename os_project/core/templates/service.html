@@ -11,12 +11,11 @@
             {% include 'service_form.html' %}
         {% else %}
 
-            <a href="{% url 'service_add' os_pk %}" class="btn btn-primary" >
+            <a href="{% url 'service_add' %}" class="btn btn-primary" >
                 <span class="glyphicon glyphicon-plus"></span>&nbsp;
                 Adicionar novo Serviço
             </a>
-            <hr>
-
+            <br><br>
             {% if services %}
                 {% include 'service_grid.html' %}
             {% else %}

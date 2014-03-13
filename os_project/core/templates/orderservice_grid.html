@@ -10,20 +10,20 @@
         {% for item in lista %}
         <tr>
             <td>
-                <a href="{% url 'orderservice' item.id %}" data-toggle="tooltip" 
+                <a href="{% url 'orderservice_edit' item.id %}" data-toggle="tooltip" 
                         title="[ Alterar ] Order de Serviço...">
                     {{item.numero}}
                 </a>
             </td>
             <td>
-                <a href="{% url 'orderservice' item.id %}" data-toggle="tooltip" 
+                <a href="{% url 'orderservice_edit' item.id %}" data-toggle="tooltip" 
                         title="[ Alterar ] Order de Serviço...">
                     {{item.projetoNome}}
                 </a>
             </td>
             <td>{{item.cliente}}</td>
             <td style="text-align: center">
-                <a href="{% url 'orderservice' item.id %}">
+                <a href="{% url 'orderservice_edit' item.id %}">
                     <span class="glyphicon glyphicon-edit" data-toggle="tooltip" 
                         title="[ Alterar ] Order de Serviço..."></span>
                 </a>

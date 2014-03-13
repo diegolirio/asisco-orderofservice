@@ -50,12 +50,12 @@ def print_os(request, pk):
 def orderservice_edit(request, pk):
     print "orderservice_edit(request, pk)..."
     orderservice = get_object_or_404(OrdemServico, pk=pk)
-    services = orderservice.osositem_os.all()
+    ositems = orderservice.osositem_os.all()
     form = OrdemServicoForm(instance=orderservice)
     context = {'form': form,
                'os_pk': pk,
                'orderservice': orderservice,
-               'services': services}
+               'ositems': ositems}
     return render(request, 'orderservice_form.html', context)
 
 
@@ -92,6 +92,67 @@ def orderservice_delete(request, pk):
 #=== Ordem de Servicos =========================================================================
 
 
+
+def ositem(request, os_pk, pk=0):
+    if request.method == 'POST':
+        return ositem_save(request, os_pk, pk)
+    else:
+        if int(pk) == 0:
+            return ositem_add(request, os_pk)
+        else:
+            return ositem_edit(request, os_pk, pk)
+
+
+def ositem_add(request, os_pk):
+    form = OrdemServicoItemForm()
+    context = {'form': form,
+               'os_pk': os_pk,
+               'pk': 0}
+    return render(request, 'ositem.html', context)
+
+
+def ositem_edit(request, os_pk, pk):
+    print "ositem_edit[ %s ]..." % pk
+    ositem = get_object_or_404(OrdemServico_OrdemServicoItem, pk=pk)
+    form = OrdemServicoItemForm(instance=ositem)
+    context = {'form': form,
+               'pk': pk,
+               'os_pk': os_pk}
+    return render(request, 'ositem.html', context)
+
+
+def ositem_save(request, os_pk, pk=0):
+    form = OrdemServicoItemForm(request.POST)
+    if not form.is_valid():
+        print "if not form.is_valid():"
+        return render(request, 'ositem.html', {'form': form, 'os_pk': os_pk,})
+
+    ositem = form.save(commit=False)
+    if int(pk) > 0:
+        ositem.id = pk
+
+    #model = form.save(commit=False)
+    #dtRec = datetime.datetime.utcnow().replace(tzinfo=utc)
+    #model.dataRecebimento = dtRec
+    ositem.ordemServico_id = os_pk
+    ositem.save()
+    return HttpResponseRedirect(reverse('orderservice_edit', args=(os_pk,)))
+
+
+def ositem_delete(request, pk):
+    ositem = get_object_or_404(OrdemServico_OrdemServicoItem, pk=pk)
+    if request.GET.get('confirm') == 'ok':
+        ositem.delete()
+        return HttpResponseRedirect(reverse('orderservice_list'))
+    else:
+        context = {'model_name': 'Serviço',
+                   'model': ositem,
+                   'url_confirm': reverse('ositem_delete', args=[ositem.pk]),
+                   'url_cancel': reverse('orderservice_list'),
+        }
+        return render(request, 'base_delete.html', context)
+
+
 #=== Servicos ==================================================================================
 def services(request):
     services = OrdemServicoItem.objects.all()
@@ -99,38 +160,36 @@ def services(request):
     return render(request, 'service.html', context)
 
 
-def service(request, os_pk, pk=0):
-    print "service(request, pk, os_pk):..."
+def service(request, pk=0):
     if request.method == 'POST':
-        return service_save(request, os_pk, pk)
+        return service_save(request, pk)
     else:
         if int(pk) == 0:
-            return service_add(request, os_pk)
+            return service_add(request)
         else:
-            return service_edit(request, os_pk, pk)
+            return service_edit(request, pk)
 
 
-def service_add(request, os_pk):
-    form = OrdemServicoItemForm()
-    context = {'form': form,
-               'os_pk': os_pk,
-               'pk': 0}
+def service_add(request):
+    print "service_add..."
+    form = ServiceForm()
+    who_called = request.GET.get('who_called')
+    context = {'form': form, 'who_called': who_called, }
     return render(request, 'service.html', context)
 
 
-def service_edit(request, os_pk, pk):
+def service_edit(request, pk):
     service = get_object_or_404(OrdemServicoItem, pk=pk)
-    form = OrdemServicoItemForm(instance=service)
+    form = ServiceForm(instance=service)
     context = {'form': form,
-               'pk': pk,
-               'os_pk': os_pk}
+               'pk': pk}
     return render(request, 'service.html', context)
 
 
-def service_save(request, os_pk, pk=0):
-    form = OrdemServicoItemForm(request.POST)
+def service_save(request, pk=0):
+    form = ServiceForm(request.POST)
     if not form.is_valid():
-        return render(request, 'service.html', {'form': form, 'os_pk': os_pk,})
+        return render(request, 'service.html', {'form': form})
 
     service = form.save(commit=False)
     if int(pk) > 0:
@@ -139,14 +198,18 @@ def service_save(request, os_pk, pk=0):
     #model = form.save(commit=False)
     #dtRec = datetime.datetime.utcnow().replace(tzinfo=utc)
     #model.dataRecebimento = dtRec
-    service.ordemServico_id = os_pk
+    #service.ordemServico_id = os_pk
     service.save()
-    return HttpResponseRedirect(reverse('orderservice', args=(os_pk,)))
+    return HttpResponseRedirect(reverse('service_list'))
 
 
 def service_delete(request, pk):
+    print "service_delete..."
     service = get_object_or_404(OrdemServicoItem, pk=pk)
+    print "service pk: %s" % service.id
+    print "request.GET.get('confirm') = %s" % request.GET.get('confirm')
     if request.GET.get('confirm') == 'ok':
+        print "confirm = ok"
         service.delete()
         return HttpResponseRedirect(reverse('service_list'))
     else:

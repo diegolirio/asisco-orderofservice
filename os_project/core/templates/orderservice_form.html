@@ -157,7 +157,7 @@
                 <tr>
                     <td colspan="6" style="text-align: right;">
                         {% if os_pk > 0 %}
-                        <a href="{% url 'service_add' os_pk %}" class="btn btn-default" >
+                        <a href="{% url 'ositem_add' os_pk 0 %}" class="btn btn-default" >
                             <span class="glyphicon glyphicon-plus"></span>&nbsp;
                             Adicionar Item
                         </a>
@@ -176,9 +176,9 @@
 		{% endif %}
 		</form>
 
-        {% if services %}
+        {% if ositems %}
             <h3>Itens</h3>
-            {% include 'service_grid.html' %}
+            {% include 'ositem_grid.html' %}
         {% endif %}
 
     </div>

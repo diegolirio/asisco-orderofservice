@@ -10,39 +10,28 @@
         {% for service in services %}
         <tr>
             <td>
-                <a href="{% url 'service_edit' os_pk service.pk %}">
-                    {{service.item.id}}
+                <a href="{% url 'service_edit' service.pk %}">
+                    {{service.id}}
                 </a>
             </td>
             <td>
-                {{service.item.numero}}
+                {{service.numero}}
             </td>
             <td>
-                <a href="{% url 'service_edit' os_pk service.pk %}">
-                    {{service.item.denominacao}}
+                <a href="{% url 'service_edit' service.pk %}">
+                    {{service.denominacao}}
                 </a>
             </td>
             <td style="text-align: center">
-                <div class="btn-group">
-                  <a class="btn dropdown-toggle btn-small btn-default" data-toggle="dropdown" href="#">
-                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu">
-                        <li>
-                            <a href="{% url 'service_edit' os_pk service.id %}">
-                                <span class="glyphicon glyphicon-edit"></span>
-                                &nbsp; Alterar
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'service_delconf' service.id %}">
-                                <span class="glyphicon glyphicon-trash"></span>
-                                &nbsp; Excluir
-                            </a>
-                        </li>      
-                  </ul>
-                </div>      
+                <a href="{% url 'service_edit' service.id %}" data-toggle="tooltip" 
+                    title="[ Alterar ] Serviço...">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+                &nbsp;
+                <a href="{% url 'service_delconf' service.id %}" data-toggle="tooltip" 
+                    title="[ Excluir ] Serviço...">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
             </td>   
         </tr>
         {% endfor %}
