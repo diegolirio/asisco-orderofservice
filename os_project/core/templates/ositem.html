@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+   
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+        <legend>Cadastro de Items da Ordem de Serviços</legend>
+
+        {% if form %}
+            {% include 'ositem_form.html' %}
+        {% else %}
+
+            <a href="{% url 'ositem_add' os_pk %}" class="btn btn-primary" >
+                <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                Adicionar novo Serviço
+            </a>
+            <hr>
+
+            {% if services %}
+                {% include 'ositem_grid.html' %}
+            {% else %}
+                <p>
+                    <span class="label label-danger">Nenhum Serviço cadastrado até o momento!</span>
+                </p>            
+            {% endif %} <!-- if services -->
+
+        {% endif %} <!-- if form -->
+
+    </div>
+    <!-- page_context ================================================================================== -->   
+
+{% endblock page_context %}

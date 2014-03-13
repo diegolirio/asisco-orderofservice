@@ -1,0 +1,16 @@
+<form method="post" action="{% url 'ositem_save' os_pk pk %}">
+    
+    {% csrf_token %}
+    <input type="hidden" name="os_pk" value="{{ os_pk }}">
+    {{form.as_p}}
+    
+    <button type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-floppy-disk"></span>
+        Salvar
+    </button>
+    
+    <a href="{% url 'orderservice_list' %}" class="btn btn-default">
+        <span class="glyphicon glyphicon-remove"></span>
+        Cancelar
+    </a>
+</form>
