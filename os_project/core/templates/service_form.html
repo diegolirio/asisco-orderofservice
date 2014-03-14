@@ -1,15 +1,26 @@
 <form method="post" action="">
-	
+    
     {% csrf_token %}
-	{{form.as_p}}
-	
+    <input type="hidden" name="who_called" value="{{who_called}}">
+    <p>
+        <label for="id_numero">Numero de Desenvo/Conjunto/Peça:</label> 
+        <input id="id_numero" maxlength="100" 
+            name="numero" type="text" style="width: 370px;" />
+    </p>
+    <p>
+        <label for="id_denominacao">Denominação:</label> 
+        <input id="id_denominacao" maxlength="200" 
+            name="denominacao" type="text" style="width: 370px;" />
+    </p>
+    <br>
     <button type="submit" class="btn btn-primary">
         <span class="glyphicon glyphicon-floppy-disk"></span>
         Salvar
     </button>
-	
-    <a href="{% url 'service_list' %}" class="btn btn-default">
+    
+    <a href="/service/list/" class="btn btn-default">
         <span class="glyphicon glyphicon-remove"></span>
         Cancelar
     </a>
 </form>
+<!-- if form -->

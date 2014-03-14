@@ -28,5 +28,16 @@
 
     </div>
     <!-- page_context ================================================================================== -->   
+<script type="text/javascript">
+    
+    {% if who_called == 'close' %}
+        close_delete();
+    {% endif %}
+    
+    function close_delete() {   
+        window.opener.location.reload();
+        window.close(); 
+    }
 
+</script>
 {% endblock page_context %}

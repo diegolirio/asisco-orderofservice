@@ -188,8 +188,9 @@ def service_edit(request, pk):
 
 def service_save(request, pk=0):
     form = ServiceForm(request.POST)
+    who_called = request.POST.get('who_called')
     if not form.is_valid():
-        return render(request, 'service.html', {'form': form})
+        return render(request, 'service.html', {'form': form, 'who_called': 'show'})
 
     service = form.save(commit=False)
     if int(pk) > 0:
@@ -199,7 +200,17 @@ def service_save(request, pk=0):
     #dtRec = datetime.datetime.utcnow().replace(tzinfo=utc)
     #model.dataRecebimento = dtRec
     #service.ordemServico_id = os_pk
+
     service.save()
+
+
+    # tratamento p/ quando for chamado por popup =======================#    
+    if who_called:
+        return render(request, 'service.html', 
+            {'services': OrdemServicoItem.objects.all(), 'who_called': 'close'})
+    #===================================================================#
+
+    
     return HttpResponseRedirect(reverse('service_list'))
 
 
