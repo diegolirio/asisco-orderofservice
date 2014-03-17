@@ -4,21 +4,7 @@
     <!-- page_context ================================================================================== -->    
     <div class="container">
 
-		<legend>Cadastro de Ordem de Serviço</legend>
-        
-        <!--    Combobox
-				<div class="col-xs-6">
-					<select class="form-control">
-						<option>Larger select</option>
-					</select>
-				</div>        
-        -->
-        
-        {{ form.cliente }}
-        
-		{% for c in form.cliente.field.queryset %}
-			{{c.id}} - {{c.nome}}
-		{% endfor %}        
+		<legend class="text-primary">Cadastro de Ordem de Serviço</legend>
         
 		<form method="post" action="">
 		{% if form %}
@@ -26,7 +12,7 @@
 			{{ form.non_field_errors }}
 			<div class="row">
 				<div class="col-xs-3 {% if form.numero.errors %} has-error {% endif %}">
-					<label for="inputNumero">{{ form.numero.label }}</label>
+					<label for="inputNumero" class="text-info">{{ form.numero.label }}</label>
 					<input type="number" id="inputNumero" name="{{ form.numero.name }}" class="form-control" placeholder="{{ form.numero.label }}" value="{{ form.numero.value }}">
 					{% if form.numero.errors %} 
 						{% for error in form.numero.errors %}
@@ -35,7 +21,7 @@
 					{% endif %}					
 				</div>
 				<div class="col-xs-5 {% if form.projetoNome.errors %} has-error {% endif %}">
-					<label for="inputProjetoNome">{{ form.projetoNome.label }}</label>
+					<label for="inputProjetoNome" class="text-info">{{ form.projetoNome.label }}</label>
 					<input type="text" id="inputProjetoNome" name="{{ form.projetoNome.name }}" class="form-control" placeholder="{{ form.projetoNome.label }}" value="{{ form.projetoNome.value }}">
 					{% if form.projetoNome.errors %} 
 						{% for error in form.projetoNome.errors %}
@@ -43,8 +29,9 @@
 						{% endfor %}
 					{% endif %}							
 				</div>	
+				
 				<div class="col-xs-4 {% if form.cliente.errors %} has-error {% endif %}">
-					 <label for="inputCliente">{{ form.cliente.label }}</label>
+					 <label for="inputCliente" class="text-info">{{ form.cliente.label }}</label>
 					 <br/>{{ form.cliente }}
 					 <a href="{% url 'cliente_add' %}?who_called=os" onclick="show_popup_cliente(this.href); return false;">
 							<span class="glyphicon glyphicon-plus"></span>
@@ -55,11 +42,32 @@
 						{% endfor %}
 					{% endif %}							 				 
 				</div>							
+				<!--
+				<div class="col-xs-4 {% if form.cliente.errors %} has-error {% endif %}">
+					<label for="inputCliente">{{ form.cliente.label }}</label>
+					<div class="group-controls">
+						<select class="form-control" >
+							{% for c in form.cliente.field.queryset %}
+								<option value="">Selecione o Cliente</option>
+								<option value="{{c.id}}">{{c.nome}}</option>
+							{% endfor %} 						
+						</select>
+						<a href="{% url 'cliente_add' %}?who_called=os" onclick="show_popup_cliente(this.href); return false;">
+							<span class="glyphicon glyphicon-plus"></span>
+						</a>						
+					</div>
+					{% if form.cliente.errors %} 
+						{% for error in form.cliente.errors %}
+							<span class="help-block">{{ error|escape }}</span>
+						{% endfor %}
+					{% endif %}						
+				</div> 
+				--> 				
 			</div> 
 			<br/>   
 			<div class="row">
 				<div class="col-xs-3 {% if form.numeroOP.errors %} has-error {% endif %}">
-					<label for="inputNumeroOP">{{ form.numeroOP.label }}</label>
+					<label for="inputNumeroOP" class="text-info">{{ form.numeroOP.label }}</label>
 					<input type="number" id="inputNumeroOP" name="{{ form.numeroOP.name }}" class="form-control" placeholder="{{ form.numeroOP.label }}" value="{{ form.numeroOP.value }}">
 					{% if form.numeroOP.errors %} 
 						{% for error in form.numeroOP.errors %}
@@ -68,7 +76,7 @@
 					{% endif %}						
 				</div>	
 				<div class="col-xs-5 {% if form.equipamento.errors %} has-error {% endif %}">
-					<label for="inputEquipamento">{{ form.equipamento.label }}</label>
+					<label for="inputEquipamento" class="text-info">{{ form.equipamento.label }}</label>
 					<input type="text" id="inputEquipamento" name="{{ form.equipamento.name }}" class="form-control" placeholder="{{ form.equipamento.label }}" value="{{ form.equipamento.value }}">
 					{% if form.equipamento.errors %} 
 						{% for error in form.equipamento.errors %}
@@ -77,7 +85,7 @@
 					{% endif %}						
 				</div>		
 				<div class="col-xs-4 {% if form.referencia.errors %} has-error {% endif %}">
-					<label for="inputRef">{{ form.referencia.label }}</label>
+					<label for="inputRef" class="text-info">{{ form.referencia.label }}</label>
 					<input type="text" id="inputRef" name="{{ form.referencia.name }}" class="form-control" placeholder="{{ form.referencia.label }}" value="{{ form.referencia.value }}">
 					{% if form.referencia.errors %} 
 						{% for error in form.referencia.errors %}
@@ -89,7 +97,7 @@
 			<br/>
 			<div class="row">
 				<div class="col-xs-3 {% if form.realizadoPor.errors %} has-error {% endif %}">
-					 <label for="inputRealiPor">{{ form.realizadoPor.label }}</label>
+					 <label for="inputRealiPor" class="text-info">{{ form.realizadoPor.label }}</label>
 					 <br/>{{ form.realizadoPor }}
 				     <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
 						   <span class="glyphicon glyphicon-plus"></span>
@@ -101,8 +109,8 @@
 					{% endif %}						 			 
 				</div>	
 				<div class="col-xs-5 {% if form.realizadoData.errors %} has-error {% endif %}">
-					<label for="inputRealiData">{{ form.realizadoData.label }}</label>
-					<input type="date" id="inputRealiData" name="{{ form.realizadoData.name }}" class="form-control" placeholder="{{ form.realizadoData.label }}" value="{{ form.realizadoData.value }}">
+					<label for="inputRealiData" class="text-info">{{ form.realizadoData.label }}</label>
+					<input type="date" id="inputRealiData" name="{{ form.realizadoData.name }}" class="form-control" placeholder="dd/mm/aaaa" value="{{ form.realizadoData.value }}">
 					{% if form.realizadoData.errors %} 
 						{% for error in form.realizadoData.errors %}
 							<span class="help-block">{{ error|escape }}</span>
@@ -110,7 +118,7 @@
 					{% endif %}						
 				</div>	
 				<div class="col-xs-4 {% if form.verificadoPor.errors %} has-error {% endif %}">
-					 <label for="inputVerifPor">{{ form.verificadoPor.label }}</label>
+					 <label for="inputVerifPor" class="text-info">{{ form.verificadoPor.label }}</label>
 					 <br/>{{ form.verificadoPor }}
 					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
 					     <span class="glyphicon glyphicon-plus"></span>
@@ -125,8 +133,8 @@
 			<br/>
 			<div class="row">
 				<div class="col-xs-3 {% if form.verificadoData.errors %} has-error {% endif %}">
-					<label for="inputVerifData">{{ form.verificadoData.label }}</label>
-					<input type="date" id="inputVerifData" name="{{ form.verificadoData.name }}" class="form-control" placeholder="{{ form.verificadoData.label }}" value="{{ form.verificadoData.value }}">
+					<label for="inputVerifData" class="text-info">{{ form.verificadoData.label }}</label>
+					<input type="date" id="inputVerifData" name="{{ form.verificadoData.name }}" class="form-control" placeholder="dd/mm/aaaa" value="{{ form.verificadoData.value }}">
 					{% if form.verificadoData.errors %} 
 						{% for error in form.verificadoData.errors %}
 							<span class="help-block">{{ error|escape }}</span>
@@ -134,7 +142,7 @@
 					{% endif %}						
 				</div>	
 				<div class="col-xs-5 {% if form.responsavel.errors %} has-error {% endif %}"> 
-					 <label for="inputVerifPor">{{ form.responsavel.label }}</label>
+					 <label for="inputVerifPor" class="text-info">{{ form.responsavel.label }}</label>
 					 <br/>{{ form.responsavel }}
 					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
 						 <span class="glyphicon glyphicon-plus"></span>
@@ -146,7 +154,7 @@
 					{% endif %}						 
 				</div>	
 				<div class="col-xs-4 {% if form.revisao.errors %} has-error {% endif %}">
-					<label for="inputRevisao">{{ form.revisao.label }}</label>
+					<label for="inputRevisao" class="text-info">{{ form.revisao.label }}</label>
 					<input type="text" id="inputRevisao" name="{{ form.revisao.name }}" class="form-control" placeholder="{{ form.revisao.label }}" value="{{ form.revisao.value }}">
 					{% if form.revisao.errors %} 
 						{% for error in form.revisao.errors %}
@@ -158,8 +166,8 @@
 			<br/>
 			<div class="row">
 				<div class="col-xs-3 {% if form.revisaoData.errors %} has-error {% endif %}">
-					<label for="inputRevisaoData">{{ form.revisaoData.label }}</label>
-					<input type="date" id="inputRevisaoData" name="{{ form.revisaoData.name }}" class="form-control" placeholder="{{ form.revisaoData.label }}" value="{{ form.revisaoData.value }}">
+					<label for="inputRevisaoData" class="text-info">{{ form.revisaoData.label }}</label>
+					<input type="date" id="inputRevisaoData" name="{{ form.revisaoData.name }}" class="form-control" placeholder="dd/mm/aaaa" value="{{ form.revisaoData.value }}">
 					{% if form.revisaoData.errors %} 
 						{% for error in form.revisaoData.errors %}
 							<span class="help-block">{{ error|escape }}</span>
@@ -167,7 +175,7 @@
 					{% endif %}						
 				</div>
 				<div class="col-xs-5 {% if form.revisadoPor.errors %} has-error {% endif %}"> 
-					 <label for="inputRevisadoPor">{{ form.revisadoPor.label }}</label>
+					 <label for="inputRevisadoPor" class="text-info">{{ form.revisadoPor.label }}</label>
 					 <br/>{{ form.revisadoPor }}
 					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
 						  <span class="glyphicon glyphicon-plus"></span>
@@ -179,7 +187,7 @@
 					{% endif %}						 		 
 				</div>			
 				<div class="col-xs-3 {% if form.totalConjunto.errors %} has-error {% endif %}">
-					<label for="inputTotalConj">{{ form.totalConjunto.label }}</label>
+					<label for="inputTotalConj" class="text-info">{{ form.totalConjunto.label }}</label>
 					<input type="number" id="inputTotalConj" name="{{ form.totalConjunto.name }}" class="form-control" placeholder="{{ form.totalConjunto.label }}" value="{{ form.totalConjunto.value }}">
 					{% if form.totalConjunto.errors %} 
 						{% for error in form.totalConjunto.errors %}
@@ -191,7 +199,7 @@
 			<br/>
 			<div class="row">
 				<div class="col-xs-3 {% if form.equipe.errors %} has-error {% endif %}"> 
-					 <label for="inputEquipe">{{ form.equipe.label }}</label>
+					 <label for="inputEquipe" class="text-info">{{ form.equipe.label }}</label>
 					 <br/>{{ form.equipe }}
 					 <a href="{% url 'equipe_add' %}?who_called=os" onclick="show_popup_equipe(this.href); return false;">
 						   <span class="glyphicon glyphicon-plus"></span>
@@ -203,8 +211,8 @@
 					{% endif %}						 		 
 				</div>		
 				<div class="col-xs-5 {% if form.entregaPrazo.errors %} has-error {% endif %}">
-					<label for="inputEntPrazo">{{ form.entregaPrazo.label }}</label>
-					<input type="date" id="inputEntPrazo" name="{{ form.entregaPrazo.name }}" class="form-control" placeholder="{{ form.entregaPrazo.label }}" value="{{ form.entregaPrazo.value }}">
+					<label for="inputEntPrazo" class="text-info">{{ form.entregaPrazo.label }}</label>
+					<input type="date" id="inputEntPrazo" name="{{ form.entregaPrazo.name }}" class="form-control" placeholder="dd/mm/aaaa" value="{{ form.entregaPrazo.value }}">
 					{% if form.entregaPrazo.errors %} 
 						{% for error in form.entregaPrazo.errors %}
 							<span class="help-block">{{ error|escape }}</span>
@@ -212,7 +220,7 @@
 					{% endif %}						
 				</div>		
 				<div class="col-xs-4 {% if form.entregaLugar.errors %} has-error {% endif %}">
-					<label for="inputEntrLugar">{{ form.entregaLugar.label }}</label>
+					<label for="inputEntrLugar" class="text-info">{{ form.entregaLugar.label }}</label>
 					<input type="text" id="inputEntrLugar" name="{{ form.entregaLugar.name }}" class="form-control" placeholder="{{ form.entregaLugar.label }}" value="{{ form.entregaLugar.value }}">
 					{% if form.entregaLugar.errors %} 
 						{% for error in form.entregaLugar.errors %}
