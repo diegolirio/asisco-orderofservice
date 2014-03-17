@@ -1,0 +1,458 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+		<legend>Cadastro de Ordem de Serviço</legend>
+
+        <div>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-error">
+                            {{field.name}}:  <strong> {{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <!--
+				<div class="col-xs-6">
+					<select class="form-control">
+						<option>Larger select</option>
+					</select>
+				</div>        
+        -->
+        
+		<form method="post" action="">
+			<div class="row">
+				<div class="col-xs-3">
+					<label for="inputNumero">{{ form.numero.label }}</label>
+					<input type="number" id="inputNumero" name="{{ form.numero.name }}" class="form-control" placeholder="{{ form.numero.label }}" value="{{ form.numero.value }}">
+				</div>
+				<div class="col-xs-5">
+					<label for="inputProjetoNome">{{ form.projetoNome.label }}</label>
+					<input type="text" id="inputProjetoNome" name="{{ form.projetoNome.name }}" class="form-control" placeholder="{{ form.projetoNome.label }}" value="{{ form.projetoNome.value }}">
+				</div>	
+				<div class="col-xs-4">
+					 <label for="inputCliente">{{ form.cliente.label }}</label>
+					 <br/>{{ form.cliente }}
+					 <a href="{% url 'cliente_add' %}?who_called=os" onclick="show_popup_cliente(this.href); return false;">
+							<span class="glyphicon glyphicon-plus"></span>
+					 </a>					 
+				</div>							
+			</div> 
+			<br/>   
+			<div class="row">
+				<div class="col-xs-3">
+					<label for="inputNumeroOP">{{ form.numeroOP.label }}</label>
+					<input type="number" id="inputNumeroOP" name="{{ form.numeroOP.name }}" class="form-control" placeholder="{{ form.numeroOP.label }}" value="{{ form.numeroOP.value }}">
+				</div>	
+				<div class="col-xs-5">
+					<label for="inputEquipamento">{{ form.equipamento.label }}</label>
+					<input type="text" id="inputEquipamento" name="{{ form.equipamento.name }}" class="form-control" placeholder="{{ form.equipamento.label }}" value="{{ form.equipamento.value }}">
+				</div>		
+				<div class="col-xs-4">
+					<label for="inputRef">{{ form.referencia.label }}</label>
+					<input type="text" id="inputRef" name="{{ form.referencia.name }}" class="form-control" placeholder="{{ form.referencia.label }}" value="{{ form.referencia.value }}">
+				</div>										
+			</div>
+			<br/>
+			<div class="row">
+				<div class="col-xs-3">
+					 <label for="inputRealiPor">{{ form.realizadoPor.label }}</label>
+					 <br/>{{ form.realizadoPor }}
+				     <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
+						   <span class="glyphicon glyphicon-plus"></span>
+					 </a>					 
+				</div>	
+				<div class="col-xs-5">
+					<label for="inputRealiData">{{ form.realizadoData.label }}</label>
+					<input type="date" id="inputRealiData" name="{{ form.realizadoData.name }}" class="form-control" placeholder="{{ form.realizadoData.label }}" value="{{ form.realizadoData.value }}">
+				</div>	
+				<div class="col-xs-4">
+					 <label for="inputVerifPor">{{ form.verificadoPor.label }}</label>
+					 <br/>{{ form.verificadoPor }}
+					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
+					     <span class="glyphicon glyphicon-plus"></span>
+					 </a>					 
+				</div>						
+			</div>	
+			<br/>
+			<div class="row">
+				<div class="col-xs-3">
+					<label for="inputVerifData">{{ form.verificadoData.label }}</label>
+					<input type="date" id="inputVerifData" name="{{ form.verificadoData.name }}" class="form-control" placeholder="{{ form.verificadoData.label }}" value="{{ form.verificadoData.value }}">
+				</div>	
+				<div class="col-xs-5"> 
+					 <label for="inputVerifPor">{{ form.responsavel.label }}</label>
+					 <br/>{{ form.responsavel }}
+					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
+						 <span class="glyphicon glyphicon-plus"></span>
+					 </a>  			 
+				</div>	
+				<div class="col-xs-5">
+					<label for="inputRevisao">{{ form.revisao.label }}</label>
+					<input type="date" id="inputRevisao" name="{{ form.revisao.name }}" class="form-control" placeholder="{{ form.revisao.label }}" value="{{ form.revisao.value }}">
+				</div>	
+			</div>
+		</form>  
+		<hr/>
+        
+		<form class="form-horizontal" method="post" action="">
+			<!--
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-group">
+						<label for="inputNumero" class="control-label">{{ form.numero.label }}</label>
+						<input type="number" class="form-control" id="inputNumero" name="{{ form.numero.name }}" placeholder="{{ form.numero.label }}">
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="inputProjetoNome" class="control-label">{{ form.projetoNome.label }}</label>
+						<input type="text" class="form-control" id="inputProjetoNome" name="{{ form.projetoNome.name }}" placeholder="{{ form.projetoNome.label }}">				
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="inputCliente" class="control-label">{{ form.cliente.label }}</label>
+						<br/>{{ form.cliente }}
+						<a href="{% url 'cliente_add' %}?who_called=os" onclick="show_popup_cliente(this.href); return false;">
+							<span class="glyphicon glyphicon-plus"></span>
+						</a>							
+					</div>			
+				</div>
+			</div>
+			<div class="row">			
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputNumeroOP" class="control-label">{{ form.numeroOP.label }}</label>
+						<input type="text" class="form-control" id="inputNumeroOP" name="{{ form.numeroOP.name }}" placeholder="{{ form.numeroOP.label }}">				
+					</div>
+				</div>		
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputEquipamento" class="control-label">{{ form.equipamento.label }}</label>
+						<input type="text" class="form-control" id="inputEquipamento" name="{{ form.equipamento.name }}" placeholder="{{ form.equipamento.label }}">				
+					</div>
+				</div>										
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRef" class="control-label">{{ form.referencia.label }}</label>
+						<input type="text" class="form-control" id="inputRef" name="{{ form.referencia.name }}" placeholder="{{ form.referencia.label }}">				
+					</div>
+				</div>								
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRP" class="control-label">{{ form.realizadoPor.label }}</label>
+						{{ form.realizadoPor }}
+						<a href="{% url 'membro_add' %}?who_called=os"
+							   onclick="show_popup_membro(this.href); return false;">
+							   <span class="glyphicon glyphicon-plus"></span>
+						</a>				
+					</div>
+				</div>									
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRealiazadoData" class="control-label">{{ form.realizadoData.label }}</label>
+						<input type="date" class="form-control" id="inputRealizadoData" placeholder="{{ form.realizadoData.label }}">				
+					</div>
+				</div>												
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputVerifPor" class="control-label">{{ form.verificadoPor.label }}</label>
+							{{ form.verificadoPor }}
+							<a href="{% url 'membro_add' %}?who_called=os"
+							   onclick="show_popup_membro(this.href); return false;">
+							   <span class="glyphicon glyphicon-plus"></span>
+							</a>					
+					</div>
+				</div>				
+			</div>
+			-->
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputVerifData" class="control-label">{{ form.verificadoData.label }}</label>
+						<input type="date" class="form-control" id="inputVerifData">			
+					</div>
+				</div>							
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputResp" class="control-label">{{ form.responsavel.label }}</label>
+							{{ form.responsavel }}
+							<a href="{% url 'membro_add' %}?who_called=os"
+							   onclick="show_popup_membro(this.href); return false;">
+							   <span class="glyphicon glyphicon-plus"></span>
+							</a>    			
+					</div>
+				</div>										
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRevisao" class="control-label">{{ form.revisao.label }}</label>
+						<input type="text" class="form-control" id="inputRevisao" placeholder="{{ form.revisao.label }}">				
+					</div>
+				</div>														
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRevisaoData" class="control-label">{{ form.revisaoData.label }}</label>
+						<input type="date" class="form-control" id="inputRevisaoData" placeholder="{{ form.revisaoData.label }}">				
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRevisadoPor" class="control-label">{{ form.revisadoPor.label }}</label>
+						{{ form.revisadoPor }}
+						<a href="{% url 'membro_add' %}?who_called=os"
+							   onclick="show_popup_membro(this.href); return false;">
+							   <span class="glyphicon glyphicon-plus"></span>
+						</a>  				
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputRevisaoData" class="control-label">{{ form.totalConjunto.label }}</label>
+						<input type="text" class="form-control" id="inputRevisaoData" placeholder="{{ form.revisaoData.label }}">				
+					</div>
+				</div>				
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputEquipe" class="control-label col-xs-6">{{ form.equipe.label }}</label>
+						{{ form.equipe }}
+						<a href="{% url 'equipe_add' %}?who_called=os"
+							   onclick="show_popup_equipe(this.href); return false;">
+							   <span class="glyphicon glyphicon-plus"></span>
+						</a>   				
+					</div>
+				</div>											
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputEntPrazo" class="control-label col-xs-6">{{ form.entregaPrazo.label }}</label>
+						<input type="date" class="form-control" id="inputEntPrazo">					
+					</div>
+				</div>				
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="inputEntrLugar" class="control-label col-xs-6">{{ form.entregaLugar.label }}</label>
+						<input type="text" class="form-control" id="inputEntrLugar" placeholder="{{ form.entregaLugar.label }}">				
+					</div>
+				</div>				
+			</div>
+			
+			<div class="form-group">
+				{% if os_pk > 0 %}
+				<a href="{% url 'ositem_add' os_pk 0 %}" class="btn btn-default" >
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;
+					Adicionar Item
+				</a>
+				{% endif %}
+				<button type="submit" class="btn btn-primary">
+					<span class="glyphicon glyphicon-floppy-disk"></span>
+					Salvar
+				</button>
+				<a href="{% url 'orderservice_list' %}" class="btn btn-default">
+					<span class="glyphicon glyphicon-remove"></span>
+					Cancelar
+				</a>
+			</div>
+		</form>        
+
+		<!--
+		<form method="post" action="">
+		{% if form %}
+			{% csrf_token %}
+            {{ form.non_field_errors }}
+            <table>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numero">{{ form.numero.label }}:</label>
+                    </td>
+                    <td>{{ form.numero }}{{ form.numero.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_projetoNome">{{ form.projetoNome.label }}:</label>
+                    </td>
+                    <td>{{ form.projetoNome }}{{ form.projetoNome.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_cliente">{{ form.cliente.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.cliente }}
+                        {{ form.cliente.errors }}
+                        <a href="{% url 'cliente_add' %}?who_called=os"
+                           onclick="show_popup_cliente(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numeroOP">{{ form.numeroOP.label }}:</label>
+                    </td>
+                    <td>{{ form.numeroOP }}{{ form.numeroOP.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_equipamento">{{ form.equipamento.label }}:</label>
+                    </td>
+                    <td>{{ form.equipamento }}{{ form.equipamento.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_referencia">{{ form.referencia.label }}:</label>
+                    </td>
+                    <td>{{ form.referencia }}{{ form.referencia.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoPor">{{ form.realizadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.realizadoPor }}
+                        {{ form.realizadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoData">{{ form.realizadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.realizadoData }}{{ form.realizadoData.errors }}</td>
+                    <td  style="text-align: right;">
+                        <label for="id_verificadoPor">{{ form.verificadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.verificadoPor }}
+                        {{ form.verificadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_verificadoData">{{ form.verificadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.verificadoData }}{{ form.verificadoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_responsavel">{{ form.responsavel.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.responsavel }}
+                        {{ form.responsavel.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_revisao">{{ form.revisao.label }}:</label>
+                    </td>
+                    <td>{{ form.revisao }}{{ form.revisao.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_revisaoData">{{ form.revisaoData.label }}:</label>
+                    </td>
+                    <td>{{ form.revisaoData }}{{ form.revisaoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_revisadoPor">{{ form.revisadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.revisadoPor }}
+                        {{ form.revisadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_totalConjunto">{{ form.totalConjunto.label }}:</label>
+                    </td>
+                    <td>{{ form.totalConjunto }}{{ form.totalConjunto.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_equipe">{{ form.equipe.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.equipe }}
+                        {{ form.equipe.errors }}
+                        <a href="{% url 'equipe_add' %}?who_called=os"
+                           onclick="show_popup_equipe(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_entregaPrazo">{{ form.entregaPrazo.label }}:</label>
+                    </td>
+                    <td>{{ form.entregaPrazo }}{{ form.entregaPrazo.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_entregaLugar">{{ form.entregaLugar.label }}:</label><br>
+                    </td>
+                    <td colspan="5">
+                        {{ form.entregaLugar }}
+                        {{ form.entregaLugar.errors }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: right;">
+                        {% if os_pk > 0 %}
+                        <a href="{% url 'ositem_add' os_pk 0 %}" class="btn btn-default" >
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                            Adicionar Item
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Salvar
+                        </button>
+                        <a href="{% url 'orderservice_list' %}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            Cancelar
+                        </a>
+                    </td>
+               </tr>
+            </table>
+		{% endif %}
+		</form>
+		-->
+		
+        {% if ositems %}
+            <h3>Itens</h3>
+            {% include 'ositem_grid.html' %}
+        {% endif %}
+
+    </div>
+
+<script type="text/javascript">
+    function show_popup_cliente(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=700, scrollbars=no, resizable=no');
+    }
+    function show_popup_membro(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=50, scrollbars=no, resizable=no');
+    }
+    function show_popup_equipe(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=350, scrollbars=no, resizable=no');
+    }
+</script>
+
+    <!-- page_context ================================================================================== -->    
+{% endblock page_context %}
+
