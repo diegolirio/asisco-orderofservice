@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% block page_context %}
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+
+		<legend>Cadastro de Ordem de Serviço</legend>
+
+        <div>
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-error">
+                            {{field.name}}:  <strong> {{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+		<form method="post" action="">
+		{% if form %}
+			{% csrf_token %}
+            {{ form.non_field_errors }}
+            <table>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numero">{{ form.numero.label }}:</label>
+                    </td>
+                    <td>{{ form.numero }}{{ form.numero.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_projetoNome">{{ form.projetoNome.label }}:</label>
+                    </td>
+                    <td>{{ form.projetoNome }}{{ form.projetoNome.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_cliente">{{ form.cliente.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.cliente }}
+                        {{ form.cliente.errors }}
+                        <a href="{% url 'cliente_add' %}?who_called=os"
+                           onclick="show_popup_cliente(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_numeroOP">{{ form.numeroOP.label }}:</label>
+                    </td>
+                    <td>{{ form.numeroOP }}{{ form.numeroOP.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_equipamento">{{ form.equipamento.label }}:</label>
+                    </td>
+                    <td>{{ form.equipamento }}{{ form.equipamento.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_referencia">{{ form.referencia.label }}:</label>
+                    </td>
+                    <td>{{ form.referencia }}{{ form.referencia.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoPor">{{ form.realizadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.realizadoPor }}
+                        {{ form.realizadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_realizadoData">{{ form.realizadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.realizadoData }}{{ form.realizadoData.errors }}</td>
+                    <td  style="text-align: right;">
+                        <label for="id_verificadoPor">{{ form.verificadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.verificadoPor }}
+                        {{ form.verificadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_verificadoData">{{ form.verificadoData.label }}:</label>
+                    </td>
+                    <td>{{ form.verificadoData }}{{ form.verificadoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_responsavel">{{ form.responsavel.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.responsavel }}
+                        {{ form.responsavel.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_revisao">{{ form.revisao.label }}:</label>
+                    </td>
+                    <td>{{ form.revisao }}{{ form.revisao.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_revisaoData">{{ form.revisaoData.label }}:</label>
+                    </td>
+                    <td>{{ form.revisaoData }}{{ form.revisaoData.errors }}</td>
+                    <td style="text-align: right;">
+                        <label for="id_revisadoPor">{{ form.revisadoPor.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.revisadoPor }}
+                        {{ form.revisadoPor.errors }}
+                        <a href="{% url 'membro_add' %}?who_called=os"
+                           onclick="show_popup_membro(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_totalConjunto">{{ form.totalConjunto.label }}:</label>
+                    </td>
+                    <td>{{ form.totalConjunto }}{{ form.totalConjunto.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_equipe">{{ form.equipe.label }}:</label>
+                    </td>
+                    <td>
+                        {{ form.equipe }}
+                        {{ form.equipe.errors }}
+                        <a href="{% url 'equipe_add' %}?who_called=os"
+                           onclick="show_popup_equipe(this.href); return false;">
+                           <span class="glyphicon glyphicon-plus"></span>
+                        </a>                        
+                    </td>
+                    <td style="text-align: right;">
+                        <label for="id_entregaPrazo">{{ form.entregaPrazo.label }}:</label>
+                    </td>
+                    <td>{{ form.entregaPrazo }}{{ form.entregaPrazo.errors }}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">
+                        <label for="id_entregaLugar">{{ form.entregaLugar.label }}:</label><br>
+                    </td>
+                    <td colspan="5">
+                        {{ form.entregaLugar }}
+                        {{ form.entregaLugar.errors }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" style="text-align: right;">
+                        {% if os_pk > 0 %}
+                        <a href="{% url 'ositem_add' os_pk 0 %}" class="btn btn-default" >
+                            <span class="glyphicon glyphicon-plus"></span>&nbsp;
+                            Adicionar Item
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Salvar
+                        </button>
+                        <a href="{% url 'orderservice_list' %}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            Cancelar
+                        </a>
+                    </td>
+               </tr>
+            </table>
+		{% endif %}
+		</form>
+
+        {% if ositems %}
+            <h3>Itens</h3>
+            {% include 'ositem_grid.html' %}
+        {% endif %}
+
+    </div>
+
+<script type="text/javascript">
+    function show_popup_cliente(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=700, scrollbars=no, resizable=no');
+    }
+    function show_popup_membro(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=50, scrollbars=no, resizable=no');
+    }
+    function show_popup_equipe(url) {
+        popup = window.open(
+            url,
+            '',
+            'height=270, width=300, top=150, left=350, scrollbars=no, resizable=no');
+    }
+</script>
+
+    <!-- page_context ================================================================================== -->    
+{% endblock page_context %}
+

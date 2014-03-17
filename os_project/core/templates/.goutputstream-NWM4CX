@@ -17,101 +17,22 @@
                 {% endfor %}
             {% endif %}
         </div>
-        <!--
-				<div class="col-xs-6">
-					<select class="form-control">
-						<option>Larger select</option>
-					</select>
-				</div>        
-        -->
-        
-		<form method="post" action="">
-			<div class="row">
-				<div class="col-xs-3">
-					<label for="inputNumero">{{ form.numero.label }}</label>
-					<input type="number" id="inputNumero" name="{{ form.numero.name }}" class="form-control" placeholder="{{ form.numero.label }}" value="{{ form.numero.value }}">
-				</div>
-				<div class="col-xs-5">
-					<label for="inputProjetoNome">{{ form.projetoNome.label }}</label>
-					<input type="text" id="inputProjetoNome" name="{{ form.projetoNome.name }}" class="form-control" placeholder="{{ form.projetoNome.label }}" value="{{ form.projetoNome.value }}">
-				</div>	
-				<div class="col-xs-4">
-					 <label for="inputCliente">{{ form.cliente.label }}</label>
-					 <br/>{{ form.cliente }}
-					 <a href="{% url 'cliente_add' %}?who_called=os" onclick="show_popup_cliente(this.href); return false;">
-							<span class="glyphicon glyphicon-plus"></span>
-					 </a>					 
-				</div>							
-			</div> 
-			<br/>   
-			<div class="row">
-				<div class="col-xs-3">
-					<label for="inputNumeroOP">{{ form.numeroOP.label }}</label>
-					<input type="number" id="inputNumeroOP" name="{{ form.numeroOP.name }}" class="form-control" placeholder="{{ form.numeroOP.label }}" value="{{ form.numeroOP.value }}">
-				</div>	
-				<div class="col-xs-5">
-					<label for="inputEquipamento">{{ form.equipamento.label }}</label>
-					<input type="text" id="inputEquipamento" name="{{ form.equipamento.name }}" class="form-control" placeholder="{{ form.equipamento.label }}" value="{{ form.equipamento.value }}">
-				</div>		
-				<div class="col-xs-4">
-					<label for="inputRef">{{ form.referencia.label }}</label>
-					<input type="text" id="inputRef" name="{{ form.referencia.name }}" class="form-control" placeholder="{{ form.referencia.label }}" value="{{ form.referencia.value }}">
-				</div>										
-			</div>
-			<br/>
-			<div class="row">
-				<div class="col-xs-3">
-					 <label for="inputRealiPor">{{ form.realizadoPor.label }}</label>
-					 <br/>{{ form.realizadoPor }}
-				     <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
-						   <span class="glyphicon glyphicon-plus"></span>
-					 </a>					 
-				</div>	
-				<div class="col-xs-5">
-					<label for="inputRealiData">{{ form.realizadoData.label }}</label>
-					<input type="date" id="inputRealiData" name="{{ form.realizadoData.name }}" class="form-control" placeholder="{{ form.realizadoData.label }}" value="{{ form.realizadoData.value }}">
-				</div>	
-				<div class="col-xs-4">
-					 <label for="inputVerifPor">{{ form.verificadoPor.label }}</label>
-					 <br/>{{ form.verificadoPor }}
-					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
-					     <span class="glyphicon glyphicon-plus"></span>
-					 </a>					 
-				</div>										
-			</div>	
-			<br/>
-			<div class="row">
-				<div class="col-xs-3">
-					<label for="inputVerifData">{{ form.verificadoData.label }}</label>
-					<input type="date" id="inputVerifData" name="{{ form.verificadoData.name }}" class="form-control" placeholder="{{ form.verificadoData.label }}" value="{{ form.verificadoData.value }}">
-				</div>	
-				<div class="col-xs-5"> 
-					 <label for="inputVerifPor">{{ form.responsavel.label }}</label>
-					 <br/>{{ form.responsavel }}
-					 <a href="{% url 'membro_add' %}?who_called=os" onclick="show_popup_membro(this.href); return false;">
-						 <span class="glyphicon glyphicon-plus"></span>
-					 </a>  			 
-				</div>								
-			</div>
-		</form>  
-		<hr/>
         
 		<form class="form-horizontal" method="post" action="">
-			<!--
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label for="inputNumero" class="control-label">{{ form.numero.label }}</label>
 						<input type="number" class="form-control" id="inputNumero" name="{{ form.numero.name }}" placeholder="{{ form.numero.label }}">
 					</div>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label for="inputProjetoNome" class="control-label">{{ form.projetoNome.label }}</label>
 						<input type="text" class="form-control" id="inputProjetoNome" name="{{ form.projetoNome.name }}" placeholder="{{ form.projetoNome.label }}">				
 					</div>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-4">
 					<div class="form-group">
 						<label for="inputCliente" class="control-label">{{ form.cliente.label }}</label>
 						<br/>{{ form.cliente }}
@@ -169,7 +90,6 @@
 					</div>
 				</div>				
 			</div>
-			-->
 			<div class="row">
 				<div class="col-md-4">
 					<div class="form-group">
