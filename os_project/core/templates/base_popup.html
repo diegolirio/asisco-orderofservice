@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    {%  block page_head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="{{STATIC_URL}}ico/favicon.png">
+
+        {% block page_head_title %}
+            <title>OrderOfService</title>
+        {% endblock page_head_title %}
+
+        {% block page_head_css %}
+            <!-- Bootstrap core CSS -->
+            <link href="{{STATIC_URL}}css/bootstrap.css" rel="stylesheet">
+            <!-- Custom styles for this template -->
+            <!-- <link href="navbar-fixed-top.css" rel="stylesheet"> -->
+        {% endblock page_head_css %}
+ 
+        {% block style_custom %}       
+        <style type="text/css">
+        </style>
+        {% endblock style_custom %}
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="{{STATIC_URL}}js/html5shiv.js"></script>
+          <script src="{{STATIC_URL}}js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    {%  endblock page_head %}
+<body>
+{% block page_body %}
+
+    {% block top_menu %}
+    {% endblock top_menu %}
+
+    <br><br>
+
+    {% block page_context %}
+    <!-- page_context ================================================================================== -->    
+    <div class="container">
+        
+    </div> <!-- /container -->
+    <!-- page_context ============================================================================ -->        
+    {% endblock page_context %}
+
+
+    <!-- page_footer ============================================================================ -->        
+    {% include 'base_footer.html' %}
+    <!-- page_footer ============================================================================ -->        
+
+    <!-- Modal =================================================================================== -->
+    {% include 'base_modal_sobre.html' %}
+    <!-- Modal =================================================================================== -->
+
+    {% block page_body_js %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        <script src="{{STATIC_URL}}js/tooltip.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+              $('span').tooltip();
+              $('a').tooltip();
+            });
+        </script>         
+    {% endblock page_body_js %}
+
+{% endblock page_body %}
+</body>
+</html>

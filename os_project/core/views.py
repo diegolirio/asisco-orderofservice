@@ -253,6 +253,8 @@ def cliente_add(request):
     form = ClienteForm()
     who_called = request.GET.get('who_called')
     context = {'form': form, 'who_called': who_called, }
+    if who_called: # alteracao
+		return render(request, 'cliente_popup.html', context) # alteracao
     return render(request, 'cliente.html', context)
 
 
@@ -267,7 +269,9 @@ def cliente_save(request, pk):
     form = ClienteForm(request.POST)
     who_called = request.POST.get('who_called')
     if not form.is_valid():
-        return render(request, 'cliente.html', {'form': form, 'who_called': 'show'})
+		if who_called and who_called != 'None':
+			return render(request, 'cliente_popup.html', {'form': form, 'who_called': 'show'}) # alteracao
+		return render(request, 'cliente.html', {'form': form, 'who_called': 'show'})
 
     if int(pk) > 0:
         cliente = form.save(commit=False)
